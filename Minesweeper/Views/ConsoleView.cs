@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Minesweeper {
+
     class ConsoleView {
+
         public void ShowBoard(Board board, Cursor cursor) {
             Console.Clear();
             for (int i = 0; i < board.Width; i++) {
@@ -26,5 +28,26 @@ namespace Minesweeper {
             property = Int32.Parse(Console.ReadLine());
             return property;
         }
+
+        public string ReadKey() {
+            string key = Console.ReadLine();
+            return key;
+        }
+
+        public int CursorMovement(string direction) {
+            string key = ReadKey();
+            if(direction == "x") {
+                if(key == "j") { return -1; }
+                else if (key == "l") { return 1; }
+                else { return 0; }
+            } else if (direction == "y") {
+                if (key == "i") { return -1;} 
+                else if (key == "k") { return 1; }
+                else { return 0; }
+            } else {
+                return 0;
+            }
+        }
+        
     }
 }

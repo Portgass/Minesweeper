@@ -22,21 +22,9 @@ namespace Minesweeper {
         public void Update() {
             while (true) {
                 console.ShowBoard(board, cursor);
-                string key = Console.ReadLine();
-                switch (key) {
-                    case "j":
-                        cursor.XPosition -= 1;
-                        break;
-                    case "k":
-                        cursor.YPosition += 1;
-                        break;
-                    case "l":
-                        cursor.XPosition += 1;
-                        break;
-                    case "i":
-                        cursor.YPosition -= 1;
-                        break;
-                }
+                // Reads key 2 times instead of 1
+                // Needs complete rework
+                cursor.MoveCursor(console.CursorMovement("x"), console.CursorMovement("y"));
             }
         }
     }

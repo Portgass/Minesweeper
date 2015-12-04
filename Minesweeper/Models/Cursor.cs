@@ -16,5 +16,10 @@ namespace Minesweeper {
             xPosition = x;
             yPosition = y;
         }
+
+        public void MoveCursor(int x, int y) {
+            xPosition += x;
+            yPosition += y;
+        }
     }
 }
