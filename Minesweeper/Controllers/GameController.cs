@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Minesweeper {
+    enum GameAction { MoveLeft, MoveRight, MoveUp, MoveDown };
     class GameController {
         Board board;
         Cursor cursor;
@@ -16,15 +17,34 @@ namespace Minesweeper {
             board = new Board(boardWidth, boardHeight);
             cursor = new Cursor();
             board.InitializeTiles();
-            console.ShowBoard(board, cursor);
+        }
+
+        public void MoveCursor(GameAction movement) {
+            switch (movement) {
+                case GameAction.MoveLeft:
+                    cursor.XPosition -= 1;
+                    break;
+                case GameAction.MoveRight:
+                    cursor.XPosition += 1;
+                    break;
+                case GameAction.MoveUp:
+                    cursor.YPosition -= 1;
+                    break;
+                case GameAction.MoveDown:
+                    cursor.YPosition += 1;
+                    break;
+            }
+        }
+
+        public void ChooseAction() {
+            GameAction action = console.GetActionKey();
+            MoveCursor(action);
         }
 
         public void Update() {
             while (true) {
                 console.ShowBoard(board, cursor);
-                // Reads key 2 times instead of 1
-                // Needs complete rework
-                cursor.MoveCursor(console.CursorMovement("x"), console.CursorMovement("y"));
+                ChooseAction();
             }
         }
     }
