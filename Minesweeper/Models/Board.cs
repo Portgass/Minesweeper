@@ -6,24 +6,36 @@ using System.Threading.Tasks;
 
 namespace Minesweeper {
     class Board {
-        int width;
-        int height;
+
+        public class Dimension {
+            int _width = 10;
+            int _height = 10;
+
+            public int Width { get; set; }
+            public int Height { get; set; }
+
+            public Dimension() { }
+
+            public Dimension(int width, int height) {
+                _width = width;
+                _height = height;
+            }
+        }
+
+        public Dimension BoardDimension { get; set; }
+
         Tile[,] tileArray;
 
-        public int Width { get { return width; } }
-        public int Height { get { return height; } }
-        public Tile[,] TileArray { get { return tileArray; } }
+        public Tile[,] TileArray { get; }
 
-        public Board(int w = 5, int h = 5) {
-            width = w;
-            height = h;
-            tileArray = new Tile[w, h];
+        public Board(Dimension dimension) {
+            BoardDimension = dimension;
         }
 
         public void InitializeTiles() {
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    tileArray[i, j] = new Tile(i, j);
+            for (int i = 0; i < BoardDimension.Width; i++) {
+                for (int j = 0; j < BoardDimension.Height; j++) {
+                    tileArray[i, j] = new Tile(new Tile.Position(i, j));
                 }
             }
         }

@@ -6,25 +6,26 @@ using System.Threading.Tasks;
 
 namespace Minesweeper {
     class Tile {
-        int xPosition;
-        int yPosition;
-        int value;
-        bool isActive;
 
-        public int Value { get { return value; } }
-        public bool IsActive {
-            get {
-                return isActive;
-            }
-            set {
-                isActive = value;
+        public class Position {
+            int _x;
+            int _y;
+
+            public int X { get; set; }
+            public int Y { get; set; }
+
+            public Position(int x, int y) {
+                _x = x;
+                _y = y;
             }
         }
 
-        public Tile(int x, int y, int v = 0) {
-            xPosition = x;
-            yPosition = y;
-            value = v;
+        public Position TilePosition { get; set; }
+
+        public enum TileType { Empty, Bomb };
+        
+        public Tile(Position position) {
+            TilePosition = position;
         }
     }
 }

@@ -3,29 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms; // delete
 
 namespace Minesweeper {
     class GameController {
+
         Board board;
-        Cursor cursor;
-        ConsoleView console = new ConsoleView();
 
         public void InitializeGame() {
-            int boardWidth = console.GetProperty("width");
-            int boardHeight = console.GetProperty("height");
-            board = new Board(boardWidth, boardHeight);
-            cursor = new Cursor();
+            board = new Board(new Board.Dimension());
             board.InitializeTiles();
-            console.ShowBoard(board, cursor);
+            for (int i = 0; i < board.BoardDimension.Width; i++) {
+                for (int j = 0; j < board.BoardDimension.Height; j++) {
+                }
+            }
         }
 
         public void Update() {
-            while (true) {
-                console.ShowBoard(board, cursor);
-                // Reads key 2 times instead of 1
-                // Needs complete rework
-                cursor.MoveCursor(console.CursorMovement("x"), console.CursorMovement("y"));
-            }
         }
     }
 }
