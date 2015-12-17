@@ -26,8 +26,9 @@ namespace Minesweeper {
         }
 
         public void InitializeGame() {
-            _board = new Board(new Coordinates(10, 10));
+            _board = new Board(new Coordinates(15, 15));
             _board.InitializeTiles();
+            _board.PlantBombs();
             _gameView.ShowBoard(_board);
         }
 

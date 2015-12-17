@@ -34,5 +34,17 @@ namespace Minesweeper {
                 }
             }
         }
+
+        /// <summary>
+        /// New parameter for BombArray
+        /// New function to generate random nums
+        /// </summary>
+        public void PlantBombs() {
+            for (int i = 0; i < _dimension.X; i++) {
+                for (int j = 0; j < _dimension.Y; j++) {
+                    _tileArray[i, j].Type = Tile.TileType.Bomb;
+                }
+            }
+        }
     }
 }
