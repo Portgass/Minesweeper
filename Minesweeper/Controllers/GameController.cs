@@ -5,47 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Minesweeper {
-    enum GameAction { MoveLeft, MoveRight, MoveUp, MoveDown };
     class GameController {
-        Board board;
-        Cursor cursor;
-        ConsoleView console = new ConsoleView();
+
+        private Board _board;
+
+        public Board GameBoard {
+            get { return _board; }
+            set { _board = value; }
+        }
+
+        private WinFormsView _gameView;
+
+        public WinFormsView GameView {
+            get { return _gameView; }
+            set { _gameView = value; }
+        }
+
+        public GameController() {
+            _gameView = new WinFormsView();
+        }
 
         public void InitializeGame() {
-            int boardWidth = console.GetProperty("width");
-            int boardHeight = console.GetProperty("height");
-            board = new Board(boardWidth, boardHeight);
-            cursor = new Cursor();
-            board.InitializeTiles();
-        }
-
-        public void MoveCursor(GameAction movement) {
-            switch (movement) {
-                case GameAction.MoveLeft:
-                    cursor.XPosition -= 1;
-                    break;
-                case GameAction.MoveRight:
-                    cursor.XPosition += 1;
-                    break;
-                case GameAction.MoveUp:
-                    cursor.YPosition -= 1;
-                    break;
-                case GameAction.MoveDown:
-                    cursor.YPosition += 1;
-                    break;
-            }
-        }
-
-        public void ChooseAction() {
-            GameAction action = console.GetActionKey();
-            MoveCursor(action);
+            _board = new Board(new Coordinates(10, 10));
+            _board.InitializeTiles();
+            _gameView.ShowBoard(_board);
         }
 
         public void Update() {
-            while (true) {
-                console.ShowBoard(board, cursor);
-                ChooseAction();
-            }
         }
     }
 }

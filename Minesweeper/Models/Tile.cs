@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace Minesweeper {
     class Tile {
-        int xPosition;
-        int yPosition;
-        int value;
-        bool isActive;
 
-        public int Value { get; }
-        public bool IsActive { get; set; }
+        private Coordinates _position;
 
-        public Tile(int x, int y, int v = 0) {
-            xPosition = x;
-            yPosition = y;
-            value = v;
+        public Coordinates Position {
+            get { return _position; }
+            set { _position = value; }
+        }
+        
+        public Tile(Coordinates position) {
+            _position = position;
+            Console.WriteLine("Created tile with position: " + position.X + ", " + position.Y);
         }
     }
 }
