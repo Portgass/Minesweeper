@@ -7,11 +7,28 @@ using System.Threading.Tasks;
 namespace Minesweeper {
     class GameController {
 
-        Board board;
+        private Board _board;
+
+        public Board GameBoard {
+            get { return _board; }
+            set { _board = value; }
+        }
+
+        private WinFormsView _gameView;
+
+        public WinFormsView GameView {
+            get { return _gameView; }
+            set { _gameView = value; }
+        }
+
+        public GameController() {
+            _gameView = new WinFormsView();
+        }
 
         public void InitializeGame() {
-            board = new Board(new Coordinates(10, 10));
-            board.InitializeTiles();
+            _board = new Board(new Coordinates(10, 10));
+            _board.InitializeTiles();
+            _gameView.ShowBoard(_board);
         }
 
         public void Update() {

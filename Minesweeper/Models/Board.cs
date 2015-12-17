@@ -13,24 +13,23 @@ namespace Minesweeper {
             get { return _dimension; }
             set { _dimension = value; }
         }
-
-
+        
         private Tile[,] _tileArray;
 
         public Tile[,] TileArray {
             get { return _tileArray; }
             set { _tileArray = value; }
         }
-
-
+        
         public Board(Coordinates dimension) {
             _dimension = dimension;
+            _tileArray = new Tile[dimension.X, dimension.Y];
             Console.WriteLine("Created board with dimensions: " + dimension.X + ", " + dimension.Y);
         }
 
         public void InitializeTiles() {
-            for (int i = 1; i < _dimension.X; i++) {
-                for (int j = 1; j < _dimension.Y; j++) {
+            for (int i = 0; i < _dimension.X; i++) {
+                for (int j = 0; j < _dimension.Y; j++) {
                     _tileArray[i, j] = new Tile(new Coordinates(i, j));
                 }
             }
