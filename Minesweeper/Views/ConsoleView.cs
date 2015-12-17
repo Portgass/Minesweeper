@@ -34,18 +34,19 @@ namespace Minesweeper {
             return key;
         }
 
-        public int CursorMovement(string direction) {
-            string key = ReadKey();
-            if(direction == "x") {
-                if(key == "j") { return -1; }
-                else if (key == "l") { return 1; }
-                else { return 0; }
-            } else if (direction == "y") {
-                if (key == "i") { return -1;} 
-                else if (key == "k") { return 1; }
-                else { return 0; }
-            } else {
-                return 0;
+        public GameAction GetActionKey() {
+            var ch = Console.ReadKey(false).Key;
+            switch (ch) {
+                case ConsoleKey.J:
+                    return GameAction.MoveLeft;
+                case ConsoleKey.L:
+                    return GameAction.MoveRight;
+                case ConsoleKey.K:
+                    return GameAction.MoveDown;
+                case ConsoleKey.I:
+                    return GameAction.MoveUp;
+                default:
+                    return 0;
             }
         }
         

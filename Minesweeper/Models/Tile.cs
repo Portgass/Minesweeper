@@ -11,15 +11,8 @@ namespace Minesweeper {
         int value;
         bool isActive;
 
-        public int Value { get { return value; } }
-        public bool IsActive {
-            get {
-                return isActive;
-            }
-            set {
-                isActive = value;
-            }
-        }
+        public int Value { get; }
+        public bool IsActive { get; set; }
 
         public Tile(int x, int y, int v = 0) {
             xPosition = x;
