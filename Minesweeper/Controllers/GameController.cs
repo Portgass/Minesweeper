@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms; // delete
 
 namespace Minesweeper {
     class GameController {
@@ -11,12 +10,8 @@ namespace Minesweeper {
         Board board;
 
         public void InitializeGame() {
-            board = new Board(new Board.Dimension());
+            board = new Board(new Coordinates(10, 10));
             board.InitializeTiles();
-            for (int i = 0; i < board.BoardDimension.Width; i++) {
-                for (int j = 0; j < board.BoardDimension.Height; j++) {
-                }
-            }
         }
 
         public void Update() {

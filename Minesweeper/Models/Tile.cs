@@ -7,25 +7,16 @@ using System.Threading.Tasks;
 namespace Minesweeper {
     class Tile {
 
-        public class Position {
-            int _x;
-            int _y;
+        private Coordinates _position;
 
-            public int X { get; set; }
-            public int Y { get; set; }
-
-            public Position(int x, int y) {
-                _x = x;
-                _y = y;
-            }
+        public Coordinates Position {
+            get { return _position; }
+            set { _position = value; }
         }
-
-        public Position TilePosition { get; set; }
-
-        public enum TileType { Empty, Bomb };
         
-        public Tile(Position position) {
-            TilePosition = position;
+        public Tile(Coordinates position) {
+            _position = position;
+            Console.WriteLine("Created tile with position: " + position.X + ", " + position.Y);
         }
     }
 }
