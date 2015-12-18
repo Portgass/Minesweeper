@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace Minesweeper {
     class Cursor {
-        int xPosition;
-        int yPosition;
+        int xPosition = 1;
+        int yPosition = 2;
 
         public int XPosition { get; set; }
         public int YPosition { get; set; }
-
-        public Cursor(int x = 1, int y = 1) {
-            xPosition = x;
-            yPosition = y;
-        }
         
     }
 }

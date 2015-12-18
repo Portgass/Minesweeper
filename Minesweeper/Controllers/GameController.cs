@@ -43,6 +43,9 @@ namespace Minesweeper {
 
         public void Update() {
             while (true) {
+                Console.WriteLine(cursor.XPosition);
+                Console.WriteLine(cursor.YPosition);
+                Console.ReadLine();
                 console.ShowBoard(board, cursor);
                 ChooseAction();
             }

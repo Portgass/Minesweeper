@@ -14,7 +14,7 @@ namespace Minesweeper {
         public int Height { get { return height; } }
         public Tile[,] TileArray { get { return tileArray; } }
 
-        public Board(int w = 5, int h = 5) {
+        public Board(int w, int h) {
             width = w;
             height = h;
             tileArray = new Tile[w, h];
