@@ -4,20 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+public enum TileType { Empty, Bomb };
+
 namespace Minesweeper {
     class Tile {
-        int xPosition;
-        int yPosition;
-        int value;
-        bool isActive;
 
-        public int Value { get; }
-        public bool IsActive { get; set; }
+        private Coordinates _position;
 
-        public Tile(int x, int y, int v = 0) {
-            xPosition = x;
-            yPosition = y;
-            value = v;
+        public Coordinates Position {
+            get { return _position; }
+            set { _position = value; }
+        }
+
+        private TileType _type = TileType.Empty;
+
+        public TileType Type {
+            get { return _type; }
+            set {
+                _type = value;
+                Console.WriteLine("Set TileType: " + value);
+            }
+        }
+
+        public Tile(Coordinates position) {
+            _position = position;
+            Console.WriteLine("Created tile with position: " + position.X + ", " + position.Y);
         }
     }
 }
