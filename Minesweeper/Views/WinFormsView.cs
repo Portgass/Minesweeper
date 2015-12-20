@@ -49,5 +49,22 @@ namespace Minesweeper {
             Forms.Application.Run(_gameWindow);
         }
 
+
+        /// <summary>
+        /// Needs new controller for game menu
+        /// </summary>
+        public void SetBoardDimensions() {
+            Forms.Application.EnableVisualStyles();
+            SetWindowSize(new Coordinates(300, 300));
+            Forms.TextBox text = new Forms.TextBox();
+            text.Width = 200;
+            text.Height = 200;
+            text.Location = new Drawing.Point(300, 300);
+            text.Text = "asdkjfbuikdsgbfiudshi";
+            text.BackColor = Drawing.Color.Black;
+            _gameWindow.Controls.Add(text);
+            Forms.Application.Run(_gameWindow);
+        }
+
     }
 }
