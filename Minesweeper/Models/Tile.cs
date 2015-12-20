@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public enum TileType { Empty, Bomb };
+public enum TileType { Empty, Mine };
 
 namespace Minesweeper {
     class Tile {
@@ -22,7 +22,7 @@ namespace Minesweeper {
             get { return _type; }
             set {
                 _type = value;
-                Console.WriteLine("Set TileType: " + value);
+                Console.WriteLine("Set Tile[" + _position.X + ", " + _position.Y + "] TileType: " + value);
             }
         }
 

@@ -15,11 +15,11 @@ namespace Minesweeper {
             set { _gameWindow = value; }
         }
 
-        private Forms.Button[,] _tiles;
+        private Forms.Button[,] _tileObjects;
 
-        public Forms.Button[,] Tiles {
-            get { return _tiles; }
-            set { _tiles = value; }
+        public Forms.Button[,] TileObjects {
+            get { return _tileObjects; }
+            set { _tileObjects = value; }
         }
 
         public WinFormsView() {
@@ -34,17 +34,18 @@ namespace Minesweeper {
         public void ShowBoard(Board board) {
             Forms.Application.EnableVisualStyles();
             SetWindowSize(board.Dimension);
-            _tiles = new Forms.Button[board.Dimension.X, board.Dimension.Y];
+            _tileObjects = new Forms.Button[board.Dimension.X, board.Dimension.Y];
             for (int i = 0; i < board.Dimension.X; i++) {
-                for (int j = 0; j < board.Dimension.X; j++) {
+                for (int j = 0; j < board.Dimension.Y; j++) {
                     Forms.Button tile = new Forms.Button();
                     tile.Width = 25;
                     tile.Height = 25;
-                    if (board.Tiles[i,j].Type == TileType.Bomb)
+                    if (board.Tiles[i,j].Type == TileType.Mine) {
                         tile.Text = "*";
+                    }
                     tile.Location = new Drawing.Point(board.Tiles[i, j].Position.X * 25, board.Tiles[i, j].Position.Y * 25);
                     tile.Parent = _gameWindow;
-                    _tiles[i,j] = tile;
+                    _tileObjects[i,j] = tile;
                 }
             }
             Forms.Application.Run(_gameWindow);
