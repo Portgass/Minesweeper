@@ -41,9 +41,47 @@ namespace Minesweeper {
                 }
             }
         }
-        
-        public void PlantMines() {
-            int mineCount = 10;
+
+        public void SetNeighbourMineCount() {
+            for (int i = 0; i < _dimension.X; i++) {
+                for (int j = 0; j < _dimension.Y; j++) {
+                    Tile tile = _tiles[i, j];
+                    if (i != 0) {
+                        if (j != 0) {
+                            if (_tiles[i - 1, j - 1].Type == TileType.Mine)
+                                tile.NeighbourMineCount += 1;
+                        }
+                        if (_tiles[i - 1, j].Type == TileType.Mine)
+                            tile.NeighbourMineCount += 1;
+                        if (j != _dimension.Y - 1) {
+                            if (_tiles[i - 1, j + 1].Type == TileType.Mine)
+                                tile.NeighbourMineCount += 1;
+                        }
+                    }
+                    if (j != 0)
+                        if (_tiles[i, j - 1].Type == TileType.Mine)
+                        tile.NeighbourMineCount += 1;
+                    if (j != _dimension.Y - 1)
+                        if (_tiles[i, j + 1].Type == TileType.Mine)
+                        tile.NeighbourMineCount += 1;
+                    if (i != _dimension.X - 1) {
+                        if (j != 0) {
+                            if (_tiles[i + 1, j - 1].Type == TileType.Mine)
+                                tile.NeighbourMineCount += 1;
+                        }
+                        if (_tiles[i + 1, j].Type == TileType.Mine)
+                            tile.NeighbourMineCount += 1;
+                        if (j != _dimension.Y - 1) {
+                            if (_tiles[i + 1, j + 1].Type == TileType.Mine)
+                                tile.NeighbourMineCount += 1;
+                        }
+                    }
+                    _tiles[i, j] = tile;
+                }
+            }
+        }
+
+        public void PlantMines(int mineCount) {
             int maxRnd = (_dimension.X * _dimension.Y) - 1;
             List<int> mineCoords = new List<int>();
             Random rnd = new Random();
@@ -69,6 +107,7 @@ namespace Minesweeper {
                     boardPosition += 1;
                 }
             }
+            SetNeighbourMineCount();
         }
     }
 }

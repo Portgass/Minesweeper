@@ -52,6 +52,9 @@
     <Compile Include="Models\Tile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\TileView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Views\WinFormsView.cs" />
   </ItemGroup>
   <ItemGroup>

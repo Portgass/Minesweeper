@@ -31,23 +31,21 @@ namespace Minesweeper {
             _gameWindow.ClientSize = new Drawing.Size(size.X * 25, size.Y * 25);
         }
         
+        public void InitializeBoard(Board board) {
+            _tileObjects = new Forms.Button[board.Dimension.X, board.Dimension.Y];
+
+            for (int i = 0; i < board.Dimension.X; i++) {
+                for (int j = 0; j < board.Dimension.Y; j++) {
+                    Tile tile = board.Tiles[i, j];
+                    TileView tileView = new TileView(tile.Position, tile.NeighbourMineCount.ToString(), tile.Type, _gameWindow);
+                    _tileObjects[i,j] = tileView;
+                }
+            }
+        }
+
         public void ShowBoard(Board board) {
             Forms.Application.EnableVisualStyles();
             SetWindowSize(board.Dimension);
-            _tileObjects = new Forms.Button[board.Dimension.X, board.Dimension.Y];
-            for (int i = 0; i < board.Dimension.X; i++) {
-                for (int j = 0; j < board.Dimension.Y; j++) {
-                    Forms.Button tile = new Forms.Button();
-                    tile.Width = 25;
-                    tile.Height = 25;
-                    if (board.Tiles[i,j].Type == TileType.Mine) {
-                        tile.Text = "*";
-                    }
-                    tile.Location = new Drawing.Point(board.Tiles[i, j].Position.X * 25, board.Tiles[i, j].Position.Y * 25);
-                    tile.Parent = _gameWindow;
-                    _tileObjects[i,j] = tile;
-                }
-            }
             Forms.Application.Run(_gameWindow);
         }
 

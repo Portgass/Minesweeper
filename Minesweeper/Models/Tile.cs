@@ -26,6 +26,13 @@ namespace Minesweeper {
             }
         }
 
+        private int _neighbourMineCount;
+
+        public int NeighbourMineCount {
+            get { return _neighbourMineCount; }
+            set { _neighbourMineCount = value; }
+        }
+
         public Tile(Coordinates position) {
             _position = position;
             Console.WriteLine("Created tile with position: " + position.X + ", " + position.Y);

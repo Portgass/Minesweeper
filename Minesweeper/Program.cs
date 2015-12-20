@@ -9,6 +9,7 @@ namespace Minesweeper {
         static void Main(string[] args) {
             GameController gm = new GameController();
             gm.InitializeGame();
+            gm.Update();
         }
     }
 }

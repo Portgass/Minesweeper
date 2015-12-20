@@ -28,11 +28,12 @@ namespace Minesweeper {
         public void InitializeGame() {
             _board = new Board(new Coordinates(15, 15));
             _board.InitializeTiles();
-            _board.PlantMines();
-            _gameView.ShowBoard(_board);
+            _board.PlantMines(30);
+            _gameView.InitializeBoard(_board);
         }
 
         public void Update() {
+            _gameView.ShowBoard(_board);
         }
     }
 }
