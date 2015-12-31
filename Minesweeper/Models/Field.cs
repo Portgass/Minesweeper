@@ -24,6 +24,13 @@ namespace Minesweeper {
             set { _items = value; }
         }
 
+        private List<Field> _neighbours;
+
+        public List<Field> Neighbours {
+            get { return _neighbours; }
+            set { _neighbours = value; }
+        }
+
         private int _neighbourMineCount;
 
         public int NeighbourMineCount {
@@ -31,9 +38,19 @@ namespace Minesweeper {
             set { _neighbourMineCount = value; }
         }
 
+        private bool _isRevealed;
+
+        public bool IsRevealed {
+            get { return _isRevealed; }
+            set { _isRevealed = value; }
+        }
+
         public Field(Coordinates position) {
             _position = position;
             _items = new List<FieldItem>();
+            _neighbours = new List<Field>();
+            _neighbourMineCount = 0;
+            _isRevealed = false;
             Console.WriteLine("Created field with position: " + position.GetCoordinates());
         }
     }

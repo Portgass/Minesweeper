@@ -27,10 +27,42 @@ namespace Minesweeper {
             Console.WriteLine("Created board with dimensions: " + dimension.GetCoordinates());
         }
 
+        public void AssignNeighbourFields() {
+            for (int i = 0; i < _dimension.X; i++) {
+                for (int j = 0; j < _dimension.Y; j++) {
+                    Field field = _fields[i, j];
+                    if (i != 0) {
+                        if (j != 0) {
+                            field.Neighbours.Add(_fields[i - 1, j - 1]);
+                        }
+                        field.Neighbours.Add(_fields[i - 1, j]);
+                        if (j != _dimension.Y - 1) {
+                            field.Neighbours.Add(_fields[i - 1, j + 1]);
+                        }
+                    }
+                    if (j != 0)
+                        field.Neighbours.Add(_fields[i, j - 1]);
+                    if (j != _dimension.Y - 1)
+                        field.Neighbours.Add(_fields[i, j + 1]);
+                    if (i != _dimension.X - 1) {
+                        if (j != 0) {
+                            field.Neighbours.Add(_fields[i + 1, j - 1]);
+                        }
+                        field.Neighbours.Add(_fields[i + 1, j]);
+                        if (j != _dimension.Y - 1) {
+                            field.Neighbours.Add(_fields[i + 1, j + 1]);
+                        }
+                    }
+                    _fields[i, j] = field;
+                }
+            }
+        }
+
         public void InitializeFields() {
             for (int i = 0; i < _dimension.X; i++) {
                 for (int j = 0; j < _dimension.Y; j++) {
-                    _fields[i, j] = new Field(new Coordinates(i, j));
+                    Field field = new Field(new Coordinates(i, j));
+                    _fields[i, j] = field;
                 }
             }
         }
@@ -39,34 +71,9 @@ namespace Minesweeper {
             for (int i = 0; i < _dimension.X; i++) {
                 for (int j = 0; j < _dimension.Y; j++) {
                     Field field = _fields[i, j];
-                    if (i != 0) {
-                        if (j != 0) {
-                            if (_fields[i - 1, j - 1].Items.Contains(FieldItem.Mine))
-                                field.NeighbourMineCount += 1;
-                        }
-                        if (_fields[i - 1, j].Items.Contains(FieldItem.Mine))
+                    foreach (Field neighbour in field.Neighbours) {
+                        if (neighbour.Items.Contains(FieldItem.Mine)) {
                             field.NeighbourMineCount += 1;
-                        if (j != _dimension.Y - 1) {
-                            if (_fields[i - 1, j + 1].Items.Contains(FieldItem.Mine))
-                                field.NeighbourMineCount += 1;
-                        }
-                    }
-                    if (j != 0)
-                        if (_fields[i, j - 1].Items.Contains(FieldItem.Mine))
-                        field.NeighbourMineCount += 1;
-                    if (j != _dimension.Y - 1)
-                        if (_fields[i, j + 1].Items.Contains(FieldItem.Mine))
-                        field.NeighbourMineCount += 1;
-                    if (i != _dimension.X - 1) {
-                        if (j != 0) {
-                            if (_fields[i + 1, j - 1].Items.Contains(FieldItem.Mine))
-                                field.NeighbourMineCount += 1;
-                        }
-                        if (_fields[i + 1, j].Items.Contains(FieldItem.Mine))
-                            field.NeighbourMineCount += 1;
-                        if (j != _dimension.Y - 1) {
-                            if (_fields[i + 1, j + 1].Items.Contains(FieldItem.Mine))
-                                field.NeighbourMineCount += 1;
                         }
                     }
                     _fields[i, j] = field;

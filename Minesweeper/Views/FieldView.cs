@@ -25,5 +25,12 @@ namespace Minesweeper {
             this.Position = field.Position;
             this.Parent = parent;
         }
+
+        public void Reveal(Field field) {
+            if (field.Items.Contains(FieldItem.Mine))
+                this.Text = "*";
+            else
+                this.Text = field.NeighbourMineCount.ToString();
+        }
     }
 }
