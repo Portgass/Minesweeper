@@ -21,11 +21,14 @@ namespace Minesweeper {
             set { _y = value; }
         }
 
-
         public Coordinates(int x, int y) {
             _x = x;
             _y = y;
             // Console.WriteLine("New coordinates: " + x + ", " + y);
+        }
+
+        public string GetCoordinates() {
+            return _x + ", " + _y;
         }
     }
 }

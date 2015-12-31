@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Minesweeper {
-    class TileView : System.Windows.Forms.Button {
+    class FieldView : System.Windows.Forms.Button {
 
         private Coordinates _position;
 
@@ -19,15 +19,10 @@ namespace Minesweeper {
             }
         }
 
-        public TileView(Coordinates position, string neighbourMineCount, List<TileObject> objects, Form parent) {
+        public FieldView(Field field, Form parent) {
             this.Width = 25;
             this.Height = 25;
-            this.Position = position;
-            this.Text = neighbourMineCount;
-            if (neighbourMineCount == "0")
-                this.Text = "";
-            if (objects.Contains(TileObject.Mine))
-                this.Text = "*";
+            this.Position = field.Position;
             this.Parent = parent;
         }
     }

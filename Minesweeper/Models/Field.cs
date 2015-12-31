@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public enum TileObject { Mine };
+public enum FieldItem { Mine };
 
 namespace Minesweeper {
-    class Tile {
+    class Field {
 
         private Coordinates _position;
 
@@ -16,12 +16,12 @@ namespace Minesweeper {
             set { _position = value; }
         }
 
-        private List<TileObject> _objects;
+        private List<FieldItem> _items;
 
-        public List<TileObject> Objects
+        public List<FieldItem> Items
         {
-            get { return _objects; }
-            set { _objects = value; }
+            get { return _items; }
+            set { _items = value; }
         }
 
         private int _neighbourMineCount;
@@ -31,10 +31,10 @@ namespace Minesweeper {
             set { _neighbourMineCount = value; }
         }
 
-        public Tile(Coordinates position) {
+        public Field(Coordinates position) {
             _position = position;
-            _objects = new List<TileObject>();
-            Console.WriteLine("Created tile with position: " + position.X + ", " + position.Y);
+            _items = new List<FieldItem>();
+            Console.WriteLine("Created field with position: " + position.GetCoordinates());
         }
     }
 }
