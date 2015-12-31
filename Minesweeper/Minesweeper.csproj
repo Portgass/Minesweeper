@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Coordinates.cs" />
     <Compile Include="Models\Field.cs" />
@@ -55,7 +56,12 @@
     <Compile Include="Views\FieldView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\WinFormsView.cs" />
+    <Compile Include="Views\GameView.cs" />
+    <Compile Include="Views\MenuOption.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\MenuView.cs" />
+    <Compile Include="Views\View.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

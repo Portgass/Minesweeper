@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace Minesweeper {
     class Program {
         static void Main(string[] args) {
-            GameController gm = new GameController();
+            MenuController mn = new MenuController();
+            mn.StartMenu();
+            GameController gm = new GameController(mn.Difficulty);
             gm.InitializeGame();
             gm.Update();
         }

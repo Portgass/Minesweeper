@@ -9,12 +9,17 @@ namespace Minesweeper {
     class GameController {
 
         private Board _board;
-        private WinFormsView _gameView;
+        private GameView _gameView;
         private Dictionary<Field, FieldView> _fieldMap;
         private Dictionary<FieldView, Field> _fieldViewMap;
+        private int _bombCount;
 
-        public GameController() {
-            _gameView = new WinFormsView();
+        public GameController(GameDifficulty difficulty) {
+            _gameView = new GameView();
+            if (difficulty == GameDifficulty.Easy)
+                _bombCount = 10;
+            else if (difficulty == GameDifficulty.Standart)
+                _bombCount = 30;
         }
 
         void AssignViewToFields() {
@@ -23,7 +28,7 @@ namespace Minesweeper {
             for (int i = 0; i < _board.Dimension.X; i++) {
                 for (int j = 0; j < _board.Dimension.Y; j++) {
                     Field field = _board.Fields[i, j];
-                    FieldView fieldView = new FieldView(field, _gameView.GameWindow);
+                    FieldView fieldView = new FieldView(field, _gameView.Window);
                     fieldView.MouseDown += OnFieldClick;
                     _fieldMap.Add(field, fieldView);
                     _fieldViewMap.Add(fieldView, field);
@@ -40,11 +45,9 @@ namespace Minesweeper {
             _fieldViewMap[fieldView] = field;
             if (field.NeighbourMineCount == 0) {
                 foreach (Field neighbour in field.Neighbours) {
-                    if (neighbour.NeighbourMineCount == 0) {
                         FieldView neighbourView = _fieldMap[neighbour];
                         if (!neighbour.IsRevealed)
                             RevealField(neighbourView);
-                    }
                 }
             }
         }
@@ -75,29 +78,12 @@ namespace Minesweeper {
             _board = new Board(new Coordinates(15, 15));
             _board.InitializeFields();
             _board.AssignNeighbourFields();
-            _board.PlantMines(30);
+            _board.PlantMines(_bombCount);
             AssignViewToFields();
         }
 
         public void Update() {
             _gameView.ShowBoard(_board);
-        }
-
-        public void StartMenu() {
-            WinFormsView menu = new WinFormsView();
-            System.Windows.Forms.Form window = menu.GameWindow;
-            window.Size = new System.Drawing.Size(400, 400);
-
-            System.Windows.Forms.Label label = new System.Windows.Forms.Label();
-            label.Parent = window;
-            label.Text = "Minesweeper";
-            label.Font = new System.Drawing.Font("Arial", 36, System.Drawing.FontStyle.Bold);
-            label.AutoSize = true;
-            label.Left = (window.ClientSize.Width - label.Width) / 2;
-            label.Top = 50;
-
-            System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.Run(window);
         }
 
     }
