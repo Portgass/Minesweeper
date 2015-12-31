@@ -19,14 +19,22 @@ namespace Minesweeper {
             }
         }
 
-        public TileView(Coordinates position, string neighbourMineCount, TileType type, Forms.Form parent) {
+        private bool _revealed;
+
+        public bool Revealed
+        {
+            get { return _revealed; }
+            set { _revealed = value; }
+        }
+
+        public TileView(Coordinates position, string neighbourMineCount, List<TileObject> objects, Forms.Form parent) {
             this.Width = 25;
             this.Height = 25;
             this.Position = position;
             this.Text = neighbourMineCount;
             if (neighbourMineCount == "0")
                 this.Text = "";
-            if (type == TileType.Mine)
+            if (objects.Contains(TileObject.Mine))
                 this.Text = "*";
             this.Parent = parent;
         }

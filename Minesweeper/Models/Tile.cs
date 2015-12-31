@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public enum TileType { Empty, Mine };
+public enum TileObject { Mine };
 
 namespace Minesweeper {
     class Tile {
@@ -16,14 +16,12 @@ namespace Minesweeper {
             set { _position = value; }
         }
 
-        private TileType _type = TileType.Empty;
+        private List<TileObject> _objects;
 
-        public TileType Type {
-            get { return _type; }
-            set {
-                _type = value;
-                Console.WriteLine("Set Tile[" + _position.X + ", " + _position.Y + "] TileType: " + value);
-            }
+        public List<TileObject> Objects
+        {
+            get { return _objects; }
+            set { _objects = value; }
         }
 
         private int _neighbourMineCount;
@@ -35,6 +33,7 @@ namespace Minesweeper {
 
         public Tile(Coordinates position) {
             _position = position;
+            _objects = new List<TileObject>();
             Console.WriteLine("Created tile with position: " + position.X + ", " + position.Y);
         }
     }

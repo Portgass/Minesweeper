@@ -37,7 +37,7 @@ namespace Minesweeper {
             for (int i = 0; i < board.Dimension.X; i++) {
                 for (int j = 0; j < board.Dimension.Y; j++) {
                     Tile tile = board.Tiles[i, j];
-                    TileView tileView = new TileView(tile.Position, tile.NeighbourMineCount.ToString(), tile.Type, _gameWindow);
+                    TileView tileView = new TileView(tile.Position, tile.NeighbourMineCount.ToString(), tile.Objects, _gameWindow);
                     _tileObjects[i,j] = tileView;
                 }
             }

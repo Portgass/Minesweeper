@@ -48,31 +48,31 @@ namespace Minesweeper {
                     Tile tile = _tiles[i, j];
                     if (i != 0) {
                         if (j != 0) {
-                            if (_tiles[i - 1, j - 1].Type == TileType.Mine)
+                            if (_tiles[i - 1, j - 1].Objects.Contains(TileObject.Mine))
                                 tile.NeighbourMineCount += 1;
                         }
-                        if (_tiles[i - 1, j].Type == TileType.Mine)
+                        if (_tiles[i - 1, j].Objects.Contains(TileObject.Mine))
                             tile.NeighbourMineCount += 1;
                         if (j != _dimension.Y - 1) {
-                            if (_tiles[i - 1, j + 1].Type == TileType.Mine)
+                            if (_tiles[i - 1, j + 1].Objects.Contains(TileObject.Mine))
                                 tile.NeighbourMineCount += 1;
                         }
                     }
                     if (j != 0)
-                        if (_tiles[i, j - 1].Type == TileType.Mine)
+                        if (_tiles[i, j - 1].Objects.Contains(TileObject.Mine))
                         tile.NeighbourMineCount += 1;
                     if (j != _dimension.Y - 1)
-                        if (_tiles[i, j + 1].Type == TileType.Mine)
+                        if (_tiles[i, j + 1].Objects.Contains(TileObject.Mine))
                         tile.NeighbourMineCount += 1;
                     if (i != _dimension.X - 1) {
                         if (j != 0) {
-                            if (_tiles[i + 1, j - 1].Type == TileType.Mine)
+                            if (_tiles[i + 1, j - 1].Objects.Contains(TileObject.Mine))
                                 tile.NeighbourMineCount += 1;
                         }
-                        if (_tiles[i + 1, j].Type == TileType.Mine)
+                        if (_tiles[i + 1, j].Objects.Contains(TileObject.Mine))
                             tile.NeighbourMineCount += 1;
                         if (j != _dimension.Y - 1) {
-                            if (_tiles[i + 1, j + 1].Type == TileType.Mine)
+                            if (_tiles[i + 1, j + 1].Objects.Contains(TileObject.Mine))
                                 tile.NeighbourMineCount += 1;
                         }
                     }
@@ -101,7 +101,8 @@ namespace Minesweeper {
             for (int i = 0; i < _dimension.X; i++) {
                 for (int j = 0; j < _dimension.Y; j++) {
                     if (mineCoords.Contains(boardPosition)) {
-                        _tiles[i, j].Type = TileType.Mine;
+                        _tiles[i, j].Objects.Add(TileObject.Mine);
+                        Console.WriteLine("Tile[" + _tiles[i, j].Position.X + ", " + _tiles[i, j].Position.Y + "] new TileObject: " + TileObject.Mine);
                         _mines.Add(_tiles[i, j]);
                     }
                     boardPosition += 1;
