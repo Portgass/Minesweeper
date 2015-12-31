@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Minesweeper {
     class GameController {
@@ -23,7 +24,7 @@ namespace Minesweeper {
                 for (int j = 0; j < _board.Dimension.Y; j++) {
                     Field field = _board.Fields[i, j];
                     FieldView fieldView = new FieldView(field, _gameView.GameWindow);
-                    fieldView.Click += OnFieldClick;
+                    fieldView.MouseDown += OnFieldClick;
                     _fieldMap.Add(field, fieldView);
                     _fieldViewMap.Add(fieldView, field);
                 }
@@ -32,6 +33,8 @@ namespace Minesweeper {
 
         void RevealField(FieldView fieldView) {
             Field field = _fieldViewMap[fieldView];
+            if (field.Items.Contains(FieldItem.Flag))
+                return;
             fieldView.Reveal(field);
             field.IsRevealed = true;
             _fieldViewMap[fieldView] = field;
@@ -46,9 +49,26 @@ namespace Minesweeper {
             }
         }
 
-        void OnFieldClick(object sender, EventArgs e) {
+        void FlagHandler(FieldView fieldView) {
+            Field field = _fieldViewMap[fieldView];
+            if (field.IsRevealed)
+                return;
+            if (!field.Items.Contains(FieldItem.Flag)) {
+                fieldView.SetFlag(true);
+                field.Items.Add(FieldItem.Flag);
+            } else {
+                fieldView.SetFlag(false);
+                field.Items.Remove(FieldItem.Flag);
+            }
+            _fieldViewMap[fieldView] = field;
+        }
+
+        void OnFieldClick(object sender, System.Windows.Forms.MouseEventArgs e) {
             FieldView fieldView = (FieldView)sender;
-            RevealField(fieldView);
+            if (e.Button == MouseButtons.Left)
+                RevealField(fieldView);
+            else if (e.Button == MouseButtons.Right)
+                FlagHandler(fieldView);
         }
 
         public void InitializeGame() {
@@ -61,6 +81,23 @@ namespace Minesweeper {
 
         public void Update() {
             _gameView.ShowBoard(_board);
+        }
+
+        public void StartMenu() {
+            WinFormsView menu = new WinFormsView();
+            System.Windows.Forms.Form window = menu.GameWindow;
+            window.Size = new System.Drawing.Size(400, 400);
+
+            System.Windows.Forms.Label label = new System.Windows.Forms.Label();
+            label.Parent = window;
+            label.Text = "Minesweeper";
+            label.Font = new System.Drawing.Font("Arial", 36, System.Drawing.FontStyle.Bold);
+            label.AutoSize = true;
+            label.Left = (window.ClientSize.Width - label.Width) / 2;
+            label.Top = 50;
+
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.Run(window);
         }
 
     }

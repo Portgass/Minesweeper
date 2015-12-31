@@ -21,7 +21,7 @@ namespace Minesweeper {
         }
 
         void SetWindowSize(Coordinates size) {
-            _gameWindow.ClientSize = new Size(size.X * 25, size.Y * 25);
+            _gameWindow.ClientSize = new Size(size.X * 25, size.Y * 25 + 25);
         }
 
         public void ShowBoard(Board board) {

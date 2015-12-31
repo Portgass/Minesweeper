@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public enum FieldItem { Mine };
+public enum FieldItem { Mine, Flag };
 
 namespace Minesweeper {
     class Field {

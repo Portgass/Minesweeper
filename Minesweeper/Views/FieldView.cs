@@ -32,5 +32,12 @@ namespace Minesweeper {
             else
                 this.Text = field.NeighbourMineCount.ToString();
         }
+
+        public void SetFlag(bool set) {
+            if (set)
+                this.Text = "!";
+            else
+                this.Text = "";
+        }
     }
 }
