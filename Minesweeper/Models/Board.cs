@@ -31,28 +31,20 @@ namespace Minesweeper {
             for (int i = 0; i < _dimension.X; i++) {
                 for (int j = 0; j < _dimension.Y; j++) {
                     Field field = _fields[i, j];
-                    if (i != 0) {
-                        if (j != 0) {
-                            field.Neighbours.Add(_fields[i - 1, j - 1]);
-                        }
-                        field.Neighbours.Add(_fields[i - 1, j]);
-                        if (j != _dimension.Y - 1) {
-                            field.Neighbours.Add(_fields[i - 1, j + 1]);
-                        }
-                    }
-                    if (j != 0)
-                        field.Neighbours.Add(_fields[i, j - 1]);
-                    if (j != _dimension.Y - 1)
-                        field.Neighbours.Add(_fields[i, j + 1]);
-                    if (i != _dimension.X - 1) {
-                        if (j != 0) {
-                            field.Neighbours.Add(_fields[i + 1, j - 1]);
-                        }
-                        field.Neighbours.Add(_fields[i + 1, j]);
-                        if (j != _dimension.Y - 1) {
-                            field.Neighbours.Add(_fields[i + 1, j + 1]);
+
+                    for (int x = i - 1; x <= i + 1; x++) {
+                        for (int y = j - 1; y <=  j + 1; y++) {
+                            if ((x < 0) || (y < 0) || (x >= _dimension.X) || (y >= _dimension.Y)) {
+                                Console.WriteLine(x + ", " + y);
+                                continue;
+                            }
+                            else {
+                                Console.WriteLine(x + ", " + y);
+                                field.Neighbours.Add(_fields[x, y]);
+                            }
                         }
                     }
+
                     _fields[i, j] = field;
                 }
             }
