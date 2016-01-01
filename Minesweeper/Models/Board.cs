@@ -34,13 +34,22 @@ namespace Minesweeper {
 
                     for (int x = i - 1; x <= i + 1; x++) {
                         for (int y = j - 1; y <=  j + 1; y++) {
-                            if ((x < 0) || (y < 0) || (x >= _dimension.X) || (y >= _dimension.Y)) {
-                                Console.WriteLine(x + ", " + y);
-                                continue;
-                            }
-                            else {
-                                Console.WriteLine(x + ", " + y);
+                            if (gamemode == GameMode.Normal) {
+                                if ((x < 0) || (y < 0) || (x >= _dimension.X) || (y >= _dimension.Y))
+                                    continue;
                                 field.Neighbours.Add(_fields[x, y]);
+                            } else {
+                                int tempX = x;
+                                int tempY = y;
+                                if (x < 0)
+                                    tempX = _dimension.X - 1;
+                                if (y < 0)
+                                    tempY = _dimension.Y - 1;
+                                if (x >= _dimension.X)
+                                    tempX = 0;
+                                if (y >= _dimension.Y)
+                                    tempY = 0;
+                                field.Neighbours.Add(_fields[tempX, tempY]);
                             }
                         }
                     }
