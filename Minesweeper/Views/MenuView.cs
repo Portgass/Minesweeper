@@ -16,29 +16,40 @@ namespace Minesweeper {
             set { _menuOptions = value; }
         }
 
+        private CheckBox _extremeModeEnabled;
+
+        public CheckBox ExtremeModeEnabled {
+            get { return _extremeModeEnabled; }
+            set { _extremeModeEnabled = value; }
+        }
+
         public void InitializeMenu() {
             Window.Size = new Size(600, 600);
             Window.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\bcg.png");
 
             MenuOption easyGameOption = new MenuOption(Window);
-            MenuOption standartGameOption = new MenuOption(Window);
+            MenuOption standardGameOption = new MenuOption(Window);
             MenuOption hardGameOption = new MenuOption(Window);
 
             _menuOptions.Add(easyGameOption);
-            _menuOptions.Add(standartGameOption);
+            _menuOptions.Add(standardGameOption);
             _menuOptions.Add(hardGameOption);
 
             easyGameOption.Top = 250;
-            standartGameOption.Top = 325;
+            standardGameOption.Top = 325;
             hardGameOption.Top = 400;
 
-            easyGameOption.Text = "Easy";
-            standartGameOption.Text = "Standart";
-            hardGameOption.Text = "Hard";
+            easyGameOption.Text = GameDifficulty.Easy.ToString();
+            standardGameOption.Text = GameDifficulty.Standard.ToString();
+            hardGameOption.Text = GameDifficulty.Hard.ToString();
 
             foreach (MenuOption option in _menuOptions) {
                 option.Left = (Window.ClientSize.Width - option.Size.Width) / 2;
             }
+
+            _extremeModeEnabled = new CheckBox();
+            _extremeModeEnabled.Text = "Enable Extreme Mode";
+            _extremeModeEnabled.Parent = Window;
         }
 
         public void ShowGameMenu() {

@@ -17,7 +17,7 @@ namespace Minesweeper {
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.Font = new Font("Arial", 14, FontStyle.Regular);
-            this.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\field.png");
+            this.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\menu_option.png");
         }
     }
 }

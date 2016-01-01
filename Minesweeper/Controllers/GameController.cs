@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+enum GameDifficulty { Easy, Standard, Hard };
+enum GameMode { Normal, Extreme }
+
 namespace Minesweeper {
     class GameController {
 
@@ -13,13 +16,15 @@ namespace Minesweeper {
         private Dictionary<Field, FieldView> _fieldMap;
         private Dictionary<FieldView, Field> _fieldViewMap;
         private int _bombCount;
+        private GameMode _gamemode;
 
-        public GameController(GameDifficulty difficulty) {
+        public GameController(GameDifficulty difficulty, GameMode gamemode) {
             _gameView = new GameView();
+            _gamemode = gamemode;
             if (difficulty == GameDifficulty.Easy) {
                 _bombCount = 10;
                 _board = new Board(new Coordinates(10, 10));
-            } else if (difficulty == GameDifficulty.Standart) {
+            } else if (difficulty == GameDifficulty.Standard) {
                 _bombCount = 30;
                 _board = new Board(new Coordinates(15, 15));
             } else{
@@ -102,7 +107,7 @@ namespace Minesweeper {
 
         public void InitializeGame() {
             _board.InitializeFields();
-            _board.AssignNeighbourFields();
+            _board.AssignNeighbourFields(_gamemode);
             _board.PlantMines(_bombCount);
             AssignViewToFields();
         }

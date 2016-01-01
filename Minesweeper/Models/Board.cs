@@ -27,7 +27,7 @@ namespace Minesweeper {
             Console.WriteLine("Created board with dimensions: " + dimension.GetCoordinates());
         }
 
-        public void AssignNeighbourFields() {
+        public void AssignNeighbourFields(GameMode gamemode) {
             for (int i = 0; i < _dimension.X; i++) {
                 for (int j = 0; j < _dimension.Y; j++) {
                     Field field = _fields[i, j];
