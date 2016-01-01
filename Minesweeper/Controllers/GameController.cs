@@ -28,6 +28,10 @@ namespace Minesweeper {
             }
         }
 
+        void GameOver() {
+            _gameView.EndScreen();
+        }
+
         void AssignViewToFields() {
             _fieldMap = new Dictionary<Field, FieldView>();
             _fieldViewMap = new Dictionary<FieldView, Field>();
@@ -42,10 +46,24 @@ namespace Minesweeper {
             }
         }
 
+        void TestWin() {
+            bool allFlagged = true;
+            for (int i = 0; i < _board.Dimension.X; i++) {
+                for (int j = 0; j < _board.Dimension.Y; j++) {
+                    if (!(_board.Fields[i, j].Items.Contains(FieldItem.Mine) && _board.Fields[i, j].Items.Contains(FieldItem.Flag)))
+                        allFlagged = false;
+                }
+            }
+            if (allFlagged)
+                GameOver();
+        }
+
         void RevealField(FieldView fieldView) {
             Field field = _fieldViewMap[fieldView];
             if (field.Items.Contains(FieldItem.Flag))
                 return;
+            if (field.Items.Contains(FieldItem.Mine))
+                GameOver();
             fieldView.Reveal(field);
             field.IsRevealed = true;
             _fieldViewMap[fieldView] = field;
@@ -65,9 +83,11 @@ namespace Minesweeper {
             if (!field.Items.Contains(FieldItem.Flag)) {
                 fieldView.SetFlag(true);
                 field.Items.Add(FieldItem.Flag);
+                Console.WriteLine("Flagged field[" + field.Position.GetCoordinates() + "]");
             } else {
                 fieldView.SetFlag(false);
                 field.Items.Remove(FieldItem.Flag);
+                Console.WriteLine("Unflagged field[" + field.Position.GetCoordinates() + "]");
             }
             _fieldViewMap[fieldView] = field;
         }

@@ -17,5 +17,16 @@ namespace Minesweeper {
             SetWindowSize(board.Dimension);
             Window.Show();
         }
+
+        public void EndScreen() {
+            Form form = new Form();
+            Label label = new Label();
+            label.Parent = form;
+            label.Text = "Game Over";
+            label.AutoSize = true;
+            label.Font = new Font("Arial", 36, FontStyle.Bold);
+            Window.Close();
+            form.Show();
+        }
     }
 }

@@ -97,12 +97,13 @@ namespace Minesweeper {
                 Console.WriteLine("Random number " + (i + 1) + ": " + rndNum);
             }
 
+            Console.WriteLine("Planting " + mineCount + " mines");
             int boardPosition = 0;
             for (int i = 0; i < _dimension.X; i++) {
                 for (int j = 0; j < _dimension.Y; j++) {
                     if (mineCoords.Contains(boardPosition)) {
                         _fields[i, j].Items.Add(FieldItem.Mine);
-                        Console.WriteLine("Field[" + _fields[i, j].Position.GetCoordinates() + "] new Mine");
+                        Console.WriteLine("Set mine on field[" + _fields[i, j].Position.GetCoordinates() + "]");
                     }
                     boardPosition += 1;
                 }
