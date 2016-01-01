@@ -9,9 +9,6 @@ namespace Minesweeper {
         static void Main(string[] args) {
             MenuController mn = new MenuController();
             mn.StartMenu();
-            GameController gm = new GameController(mn.Difficulty);
-            gm.InitializeGame();
-            gm.Update();
         }
     }
 }

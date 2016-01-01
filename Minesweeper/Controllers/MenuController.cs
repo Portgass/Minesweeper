@@ -31,16 +31,26 @@ namespace Minesweeper {
 
         void OptionClicked(object sender, System.Windows.Forms.MouseEventArgs e) {
             MenuOption option = (MenuOption)sender;
+
             if (option.Text == "Easy")
                 _difficulty = GameDifficulty.Easy;
             else if (option.Text == "Standart")
                 _difficulty = GameDifficulty.Standart;
-            _menuView.CloseWindow();
+            else
+                _difficulty = GameDifficulty.Hard;
+
+            _menuView.Window.Close();
+            GameController gm = new GameController(_difficulty);
+            gm.InitializeGame();
+            gm.Update();
         }
 
         public void StartMenu() {
+            _menuView.InitializeMenu();
+            foreach (MenuOption option in _menuView.MenuOptions) {
+                option.MouseClick += OptionClicked;
+            }
             _menuView.ShowGameMenu();
-            _menuView.MenuOptions.ForEach(option => option.MouseClick += OptionClicked);
         }
     }
 }

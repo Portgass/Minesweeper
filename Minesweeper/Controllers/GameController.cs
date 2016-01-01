@@ -16,10 +16,16 @@ namespace Minesweeper {
 
         public GameController(GameDifficulty difficulty) {
             _gameView = new GameView();
-            if (difficulty == GameDifficulty.Easy)
+            if (difficulty == GameDifficulty.Easy) {
                 _bombCount = 10;
-            else if (difficulty == GameDifficulty.Standart)
+                _board = new Board(new Coordinates(10, 10));
+            } else if (difficulty == GameDifficulty.Standart) {
                 _bombCount = 30;
+                _board = new Board(new Coordinates(15, 15));
+            } else{
+                _bombCount = 50;
+                _board = new Board(new Coordinates(25, 25));
+            }
         }
 
         void AssignViewToFields() {
@@ -43,7 +49,7 @@ namespace Minesweeper {
             fieldView.Reveal(field);
             field.IsRevealed = true;
             _fieldViewMap[fieldView] = field;
-            if (field.NeighbourMineCount == 0) {
+            if (field.NeighbourMineCount == 0 && !field.Items.Contains(FieldItem.Mine)) {
                 foreach (Field neighbour in field.Neighbours) {
                         FieldView neighbourView = _fieldMap[neighbour];
                         if (!neighbour.IsRevealed)
@@ -75,7 +81,6 @@ namespace Minesweeper {
         }
 
         public void InitializeGame() {
-            _board = new Board(new Coordinates(15, 15));
             _board.InitializeFields();
             _board.AssignNeighbourFields();
             _board.PlantMines(_bombCount);

@@ -16,7 +16,7 @@ namespace Minesweeper {
             set { _menuOptions = value; }
         }
 
-        public void ShowGameMenu() {
+        public void InitializeMenu() {
             Window.Size = new Size(600, 600);
             Window.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\bcg.png");
 
@@ -28,10 +28,6 @@ namespace Minesweeper {
             _menuOptions.Add(standartGameOption);
             _menuOptions.Add(hardGameOption);
 
-            foreach(MenuOption option in _menuOptions) {
-                option.Left = (Window.ClientSize.Width - option.Size.Width) / 2;
-            }
-
             easyGameOption.Top = 250;
             standartGameOption.Top = 325;
             hardGameOption.Top = 400;
@@ -40,12 +36,15 @@ namespace Minesweeper {
             standartGameOption.Text = "Standart";
             hardGameOption.Text = "Hard";
 
-            Application.EnableVisualStyles();
-            Application.Run(Window);
+            foreach (MenuOption option in _menuOptions) {
+                option.Left = (Window.ClientSize.Width - option.Size.Width) / 2;
+            }
         }
 
-        public void CloseWindow() {
-            Application.Exit();
+        public void ShowGameMenu() {
+            Application.EnableVisualStyles();
+            Window.Show();
+            Application.Run();
         }
     }
 }

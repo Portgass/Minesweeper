@@ -14,9 +14,8 @@ namespace Minesweeper {
         }
 
         public void ShowBoard(Board board) {
-            Application.EnableVisualStyles();
             SetWindowSize(board.Dimension);
-            Application.Run(Window);
+            Window.Show();
         }
     }
 }
