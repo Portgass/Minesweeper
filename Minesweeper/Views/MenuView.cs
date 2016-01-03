@@ -43,12 +43,17 @@ namespace Minesweeper {
             standardGameOption.Top = 310;
             hardGameOption.Top = 370;
 
+            easyGameOption.BackgroundImage = Properties.Resources.option_easy;
+            standardGameOption.BackgroundImage = Properties.Resources.option_standard;
+            hardGameOption.BackgroundImage = Properties.Resources.option_hard;
+
             foreach (MenuOption option in _menuOptions) {
                 option.Left = (Window.ClientSize.Width - option.Size.Width) / 2;
             }
 
             _extremeModeEnabled = new MenuOption(Window);
             _extremeModeEnabled.Location = new Point(((Window.ClientSize.Width - _extremeModeEnabled.Size.Width) / 2), 430);
+            _extremeModeEnabled.BackgroundImage = Properties.Resources.option_extreme;
         }
 
         public void ShowGameMenu() {

@@ -103,9 +103,49 @@ namespace Minesweeper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap option {
+        internal static System.Drawing.Bitmap option_easy {
             get {
-                object obj = ResourceManager.GetObject("option", resourceCulture);
+                object obj = ResourceManager.GetObject("option_easy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap option_extreme {
+            get {
+                object obj = ResourceManager.GetObject("option_extreme", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap option_extreme_selected {
+            get {
+                object obj = ResourceManager.GetObject("option_extreme_selected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap option_hard {
+            get {
+                object obj = ResourceManager.GetObject("option_hard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap option_standard {
+            get {
+                object obj = ResourceManager.GetObject("option_standard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

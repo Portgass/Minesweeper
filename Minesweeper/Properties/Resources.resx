@@ -130,7 +130,19 @@
   <data name="field_revealed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\field_revealed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="option" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\option.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="option_easy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\option_easy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="option_extreme" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\option_extreme.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="option_extreme_selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\option_extreme_selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="option_hard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\option_hard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="option_standard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\option_standard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

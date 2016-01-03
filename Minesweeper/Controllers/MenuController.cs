@@ -42,10 +42,16 @@ namespace Minesweeper {
         }
 
         void ExtremeModeSwitch(object sender, System.Windows.Forms.MouseEventArgs e) {
-            if (_gameMode == GameMode.Normal)
+            MenuOption option = (MenuOption)sender;
+
+            if (_gameMode == GameMode.Normal) {
+                option.BackgroundImage = Properties.Resources.option_extreme_selected;
                 _gameMode = GameMode.Extreme;
-            else
+            }
+            else {
+                option.BackgroundImage = Properties.Resources.option_extreme;
                 _gameMode = GameMode.Normal;
+            }
 
             Console.WriteLine("Changed mode to: " + _gameMode);
         }

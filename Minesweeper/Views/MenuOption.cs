@@ -25,8 +25,8 @@ namespace Minesweeper {
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            this.FlatAppearance.MouseDownBackColor = Color.Transparent;
             this.Font = new Font("Arial", 14, FontStyle.Regular);
-            this.BackgroundImage = Properties.Resources.option;
         }
     }
 }
