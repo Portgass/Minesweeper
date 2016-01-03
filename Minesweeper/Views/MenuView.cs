@@ -16,9 +16,9 @@ namespace Minesweeper {
             set { _menuOptions = value; }
         }
 
-        private CheckBox _extremeModeEnabled;
+        private MenuOption _extremeModeEnabled;
 
-        public CheckBox ExtremeModeEnabled {
+        public MenuOption ExtremeModeEnabled {
             get { return _extremeModeEnabled; }
             set { _extremeModeEnabled = value; }
         }
@@ -31,25 +31,24 @@ namespace Minesweeper {
             MenuOption standardGameOption = new MenuOption(Window);
             MenuOption hardGameOption = new MenuOption(Window);
 
+            easyGameOption.GameDifficulty = GameDifficulty.Easy;
+            standardGameOption.GameDifficulty = GameDifficulty.Standard;
+            hardGameOption.GameDifficulty = GameDifficulty.Hard;
+
             _menuOptions.Add(easyGameOption);
             _menuOptions.Add(standardGameOption);
             _menuOptions.Add(hardGameOption);
 
             easyGameOption.Top = 250;
-            standardGameOption.Top = 325;
-            hardGameOption.Top = 400;
-
-            easyGameOption.Text = GameDifficulty.Easy.ToString();
-            standardGameOption.Text = GameDifficulty.Standard.ToString();
-            hardGameOption.Text = GameDifficulty.Hard.ToString();
+            standardGameOption.Top = 310;
+            hardGameOption.Top = 370;
 
             foreach (MenuOption option in _menuOptions) {
                 option.Left = (Window.ClientSize.Width - option.Size.Width) / 2;
             }
 
-            _extremeModeEnabled = new CheckBox();
-            _extremeModeEnabled.Text = "Enable Extreme Mode";
-            _extremeModeEnabled.Parent = Window;
+            _extremeModeEnabled = new MenuOption(Window);
+            _extremeModeEnabled.Location = new Point(((Window.ClientSize.Width - _extremeModeEnabled.Size.Width) / 2), 430);
         }
 
         public void ShowGameMenu() {

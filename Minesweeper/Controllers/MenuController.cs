@@ -30,23 +30,19 @@ namespace Minesweeper {
         void OptionClicked(object sender, System.Windows.Forms.MouseEventArgs e) {
             MenuOption option = (MenuOption)sender;
 
-            if (option.Text == GameDifficulty.Easy.ToString())
-                _difficulty = GameDifficulty.Easy;
-            else if (option.Text == GameDifficulty.Standard.ToString())
-                _difficulty = GameDifficulty.Standard;
-            else
-                _difficulty = GameDifficulty.Hard;
+            _difficulty = option.GameDifficulty;
 
             _menuView.Window.Close();
+
+            Console.WriteLine("Started " + _difficulty.ToString() + " game on " + _gameMode + " mode.");
+
             GameController gm = new GameController(_difficulty, _gameMode);
             gm.InitializeGame();
             gm.Update();
         }
 
         void ExtremeModeSwitch(object sender, System.Windows.Forms.MouseEventArgs e) {
-            System.Windows.Forms.CheckBox checkbox = (System.Windows.Forms.CheckBox)sender;
-
-            if (checkbox.Checked)
+            if (_gameMode == GameMode.Normal)
                 _gameMode = GameMode.Extreme;
             else
                 _gameMode = GameMode.Normal;
