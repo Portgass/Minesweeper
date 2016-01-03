@@ -25,7 +25,7 @@ namespace Minesweeper {
 
         public void InitializeMenu() {
             Window.Size = new Size(600, 600);
-            Window.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\bcg.png");
+            Window.BackgroundImage = Properties.Resources.bcg;
 
             MenuOption easyGameOption = new MenuOption(Window);
             MenuOption standardGameOption = new MenuOption(Window);

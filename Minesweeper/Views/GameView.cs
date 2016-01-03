@@ -10,7 +10,7 @@ namespace Minesweeper {
     class GameView : View {
 
         void SetWindowSize(Coordinates size) {
-            Window.ClientSize = new Size(size.X * 25, size.Y * 25 + 25);
+            Window.ClientSize = new Size(size.X * 32, size.Y * 32 + 32);
         }
 
         public void ShowBoard(Board board) {

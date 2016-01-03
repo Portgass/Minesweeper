@@ -15,24 +15,24 @@ namespace Minesweeper {
             get { return _position; }
             set {
                 _position = value;
-                this.Location = new Point(_position.X * 25, _position.Y * 25);
+                this.Location = new Point(_position.X * 32, _position.Y * 32);
             }
         }
 
         public FieldView(Field field, Form parent) {
-            this.Width = 25;
-            this.Height = 25;
+            this.Width = 32;
+            this.Height = 32;
             this.Position = field.Position;
             this.Parent = parent;
             this.TabStop = false;
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.Font = new Font("Arial", 11, FontStyle.Bold);
-            this.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\field.png");
+            this.BackgroundImage = Properties.Resources.field;
         }
 
         public void Reveal(Field field) {
-            this.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\field_revealed.png");
+            this.BackgroundImage = Properties.Resources.field_revealed;
             if (field.Items.Contains(FieldItem.Mine))
                 this.Text = "*";
             else if (field.NeighbourMineCount > 0)
@@ -41,9 +41,9 @@ namespace Minesweeper {
 
         public void SetFlag(bool set) {
             if (set)
-                this.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\field_flag.png");
+                this.BackgroundImage = Properties.Resources.field_flag;
             else
-                this.BackgroundImage = new Bitmap(@"C:\Users\petrd\Source\Repos\Minesweeper\Minesweeper\Images\field.png");
+                this.BackgroundImage = Properties.Resources.field;
         }
     }
 }
