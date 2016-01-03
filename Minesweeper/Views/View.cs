@@ -18,6 +18,7 @@ namespace Minesweeper {
         public View() {
             _window = new Form();
             _window.Text = "Minesweeper";
+            _window.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

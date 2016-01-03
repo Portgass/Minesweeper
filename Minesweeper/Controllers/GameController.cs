@@ -51,18 +51,6 @@ namespace Minesweeper {
             }
         }
 
-        void TestWin() {
-            bool allFlagged = true;
-            for (int i = 0; i < _board.Dimension.X; i++) {
-                for (int j = 0; j < _board.Dimension.Y; j++) {
-                    if (!(_board.Fields[i, j].Items.Contains(FieldItem.Mine) && _board.Fields[i, j].Items.Contains(FieldItem.Flag)))
-                        allFlagged = false;
-                }
-            }
-            if (allFlagged)
-                GameOver();
-        }
-
         void RevealField(FieldView fieldView) {
             Field field = _fieldViewMap[fieldView];
             if (field.Items.Contains(FieldItem.Flag))
@@ -89,10 +77,16 @@ namespace Minesweeper {
                 fieldView.SetFlag(true);
                 field.Items.Add(FieldItem.Flag);
                 Console.WriteLine("Flagged field[" + field.Position.GetCoordinates() + "]");
+                _gameView.UpdateBombCount(-1);
+                if (field.Items.Contains(FieldItem.Mine))
+                    _bombCount -= 1;
             } else {
                 fieldView.SetFlag(false);
                 field.Items.Remove(FieldItem.Flag);
                 Console.WriteLine("Unflagged field[" + field.Position.GetCoordinates() + "]");
+                _gameView.UpdateBombCount(1);
+                if (field.Items.Contains(FieldItem.Mine))
+                    _bombCount += 1;
             }
             _fieldViewMap[fieldView] = field;
         }
@@ -103,6 +97,8 @@ namespace Minesweeper {
                 RevealField(fieldView);
             else if (e.Button == MouseButtons.Right)
                 FlagHandler(fieldView);
+            if (_bombCount == 0)
+                GameOver();
         }
 
         public void InitializeGame() {
@@ -113,7 +109,7 @@ namespace Minesweeper {
         }
 
         public void Update() {
-            _gameView.ShowBoard(_board);
+            _gameView.ShowBoard(_board, _bombCount);
         }
 
     }
