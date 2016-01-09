@@ -18,6 +18,11 @@ namespace Minesweeper {
         private int _bombCount;
         private GameMode _gamemode;
 
+        /// <summary>
+        /// Initializes game controller, assignes view to it and creates board with set difficulty.
+        /// </summary>
+        /// <param name="difficulty"></param>
+        /// <param name="gamemode"></param>
         public GameController(GameDifficulty difficulty, GameMode gamemode) {
             _gameView = new GameView();
             _gamemode = gamemode;
@@ -33,6 +38,10 @@ namespace Minesweeper {
             }
         }
 
+        /// <summary>
+        /// Assigns view to each field on board and adds callback(on click) for views.
+        /// Uses two dictionaries for two way finding. Classes may be better.
+        /// </summary>
         void AssignViewToFields() {
             _fieldMap = new Dictionary<Field, FieldView>();
             _fieldViewMap = new Dictionary<FieldView, Field>();
@@ -47,6 +56,12 @@ namespace Minesweeper {
             }
         }
 
+        /// <summary>
+        /// Checks field's contents and reveals it's corresponding view.
+        /// Ends game if field contains mine.
+        /// Also reveals neighbouring fields if field has no neighbouring mines.
+        /// </summary>
+        /// <param name="fieldView"></param>
         void RevealField(FieldView fieldView) {
             Field field = _fieldViewMap[fieldView];
             if (field.Items.Contains(FieldItem.Flag))
@@ -65,6 +80,11 @@ namespace Minesweeper {
             }
         }
 
+        /// <summary>
+        /// Checks if field is not revealed and places(removes) flags from it.
+        /// Records correctly placed flags.
+        /// </summary>
+        /// <param name="fieldView"></param>
         void FlagHandler(FieldView fieldView) {
             Field field = _fieldViewMap[fieldView];
             if (field.IsRevealed)
@@ -72,14 +92,14 @@ namespace Minesweeper {
             if (!field.Items.Contains(FieldItem.Flag)) {
                 fieldView.SetFlag(true);
                 field.Items.Add(FieldItem.Flag);
-                Console.WriteLine("Flagged field[" + field.Position.GetCoordinates() + "]");
+                // Console.WriteLine("Flagged field[" + field.Position.GetCoordinates() + "]");
                 _gameView.UpdateBombCount(-1);
                 if (field.Items.Contains(FieldItem.Mine))
                     _bombCount -= 1;
             } else {
                 fieldView.SetFlag(false);
                 field.Items.Remove(FieldItem.Flag);
-                Console.WriteLine("Unflagged field[" + field.Position.GetCoordinates() + "]");
+                // Console.WriteLine("Unflagged field[" + field.Position.GetCoordinates() + "]");
                 _gameView.UpdateBombCount(1);
                 if (field.Items.Contains(FieldItem.Mine))
                     _bombCount += 1;
@@ -87,6 +107,12 @@ namespace Minesweeper {
             _fieldViewMap[fieldView] = field;
         }
 
+        /// <summary>
+        /// Runs functions based on user input.
+        /// Checks if winning condition is true.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void OnFieldClick(object sender, System.Windows.Forms.MouseEventArgs e) {
             FieldView fieldView = (FieldView)sender;
             if (e.Button == MouseButtons.Left)
@@ -97,6 +123,9 @@ namespace Minesweeper {
                 _gameView.EndScreen(true);
         }
 
+        /// <summary>
+        /// Prepares board for new game and assigns view to its elements.
+        /// </summary>
         public void InitializeGame() {
             _board.InitializeFields();
             _board.AssignNeighbourFields(_gamemode);
@@ -104,7 +133,10 @@ namespace Minesweeper {
             AssignViewToFields();
         }
 
-        public void Update() {
+        /// <summary>
+        /// Opens game view.
+        /// </summary>
+        public void Start() {
             _gameView.ShowBoard(_board, _bombCount);
         }
 

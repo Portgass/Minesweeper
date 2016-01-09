@@ -23,6 +23,11 @@ namespace Minesweeper {
             set { _extremeModeEnabled = value; }
         }
 
+
+        /// <summary>
+        /// Initializes menu window.
+        /// All UI elements are set and placed.
+        /// </summary>
         public void InitializeMenu() {
             Window.Size = new Size(600, 600);
             Window.BackgroundImage = Properties.Resources.bcg;
@@ -56,6 +61,9 @@ namespace Minesweeper {
             _extremeModeEnabled.BackgroundImage = Properties.Resources.option_extreme;
         }
 
+        /// <summary>
+        /// Starts application and shows menu.
+        /// </summary>
         public void ShowGameMenu() {
             Application.EnableVisualStyles();
             Window.Show();

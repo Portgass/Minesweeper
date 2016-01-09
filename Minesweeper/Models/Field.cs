@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 public enum FieldItem { Mine, Flag };
 
 namespace Minesweeper {
+
+    /// <summary>
+    /// Base unit on board.
+    /// </summary>
     class Field {
 
         private Coordinates _position;
@@ -45,13 +49,18 @@ namespace Minesweeper {
             set { _isRevealed = value; }
         }
 
+        /// <summary>
+        /// Initializes field with position. 
+        /// Field isn't revealed and has set 0 neighbouring mines.
+        /// </summary>
+        /// <param name="position"></param>
         public Field(Coordinates position) {
             _position = position;
             _items = new List<FieldItem>();
             _neighbours = new List<Field>();
             _neighbourMineCount = 0;
             _isRevealed = false;
-            Console.WriteLine("Created field with position: " + position.GetCoordinates());
+            // Console.WriteLine("Created field with position: " + position.GetCoordinates());
         }
     }
 }

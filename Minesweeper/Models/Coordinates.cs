@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Minesweeper {
+
+    /// <summary>
+    /// Defines the units in which are all game objects represented.
+    /// </summary>
     class Coordinates {
 
         private int _x;
@@ -27,6 +31,9 @@ namespace Minesweeper {
             // Console.WriteLine("New coordinates: " + x + ", " + y);
         }
 
+        /// <summary>
+        /// Helps with printing out the coordinates.
+        /// </summary>
         public string GetCoordinates() {
             return _x + ", " + _y;
         }

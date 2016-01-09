@@ -18,22 +18,45 @@ namespace Minesweeper {
 
         private Label _remainingBombs;
 
+        /// <summary>
+        /// Counts game time.
+        /// </summary>
         private System.Diagnostics.Stopwatch _watch = new System.Diagnostics.Stopwatch();
 
+        /// <summary>
+        /// Sets windows size, 1 unit is 32 pixels.
+        /// </summary>
+        /// <param name="size"></param>
         void SetWindowSize(Coordinates size) {
             Window.ClientSize = new Size(size.X * 32, size.Y * 32 + 32);
         }
 
+        /// <summary>
+        /// Changes displayed game time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void UpdateClock(object sender, EventArgs e) {
             _clock.Text = "Time elapsed: " + Math.Floor(_watch.Elapsed.TotalSeconds).ToString();
         }
 
+        /// <summary>
+        /// Changes displayed number of flags avaiable.
+        /// It could use rework, at least use more variables.
+        /// </summary>
+        /// <param name="value"></param>
         public void UpdateBombCount(int value) {
             int bombs = Int32.Parse(_remainingBombs.Text.Remove(0, 15));
             if (bombs > 0)
                 _remainingBombs.Text = "Avaiable flags: " + (bombs + value).ToString();
         }
 
+        /// <summary>
+        /// Sets up the game view.
+        /// Displays game time, avaiable mines count.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="bombCount"></param>
         public void ShowBoard(Board board, int bombCount) {
             SetWindowSize(board.Dimension);
             Window.BackgroundImage = Properties.Resources.panel;
@@ -49,6 +72,7 @@ namespace Minesweeper {
 
             Timer timer = new Timer();
             timer.Start();
+            // Runs every second.s
             timer.Tick += UpdateClock;
 
             _remainingBombs = new Label();
@@ -62,13 +86,20 @@ namespace Minesweeper {
             Window.Show();
         }
 
+        /// <summary>
+        /// Creates and displays end screen.
+        /// Different views for winning condition and losing.
+        /// Closes game window and on closing this window the whole application ends.
+        /// </summary>
+        /// <param name="winner"></param>
         public void EndScreen(bool winner) {
-            Form form = new Form();
-            form.ClientSize = new Size(400, 200);
+            View EndScreen = new View();
+            EndScreen.Window.ClientSize = new Size(400, 200);
+            // Shows information about game time on winning the game.
             if (winner) {
-                form.BackgroundImage = Properties.Resources.winner;
+                EndScreen.Window.BackgroundImage = Properties.Resources.winner;
                 Label time = new Label();
-                time.Parent = form;
+                time.Parent = EndScreen.Window;
                 time.BackColor = Color.Transparent;
                 time.Size = new Size(200, 60);
                 time.TextAlign = ContentAlignment.BottomRight;
@@ -80,11 +111,12 @@ namespace Minesweeper {
                     time.Text = ">999";
                 }
             } else {
-                form.BackgroundImage = Properties.Resources.game_over;
+                EndScreen.Window.BackgroundImage = Properties.Resources.game_over;
             }
+            Window.FormClosed -= ExitApp;
             Window.Close();
-            form.StartPosition = FormStartPosition.CenterScreen;
-            form.Show();
+            EndScreen.Window.StartPosition = FormStartPosition.CenterScreen;
+            EndScreen.Window.Show();
         }
     }
 }

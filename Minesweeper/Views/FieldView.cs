@@ -7,6 +7,10 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Minesweeper {
+
+    /// <summary>
+    /// Represents field on game board.
+    /// </summary>
     class FieldView : Button {
 
         private Coordinates _position;
@@ -19,6 +23,12 @@ namespace Minesweeper {
             }
         }
 
+        /// <summary>
+        /// Initializes FieldView with base parameters. 
+        /// Needs the Field it represents and parent Form.
+        /// </summary>
+        /// <param name="field"></param>
+        /// <param name="parent"></param>
         public FieldView(Field field, Form parent) {
             this.Width = 32;
             this.Height = 32;
@@ -31,6 +41,10 @@ namespace Minesweeper {
             this.BackgroundImage = Properties.Resources.field;
         }
 
+        /// <summary>
+        /// Changes background and displays number of neighbouring mines.
+        /// </summary>
+        /// <param name="field"></param>
         public void Reveal(Field field) {
             this.BackgroundImage = Properties.Resources.field_revealed;
             if (field.Items.Contains(FieldItem.Mine))
@@ -39,6 +53,10 @@ namespace Minesweeper {
                 this.Text = field.NeighbourMineCount.ToString();
         }
 
+        /// <summary>
+        /// Shows(true) or hides(false) flag on field
+        /// </summary>
+        /// <param name="set"></param>
         public void SetFlag(bool set) {
             if (set)
                 this.BackgroundImage = Properties.Resources.field_flag;

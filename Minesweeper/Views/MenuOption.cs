@@ -7,15 +7,18 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Minesweeper {
+
+    // Base button for menu view.
     class MenuOption : Button {
 
-        private GameDifficulty _gamemDifficulty;
+        private GameDifficulty _gameDifficulty;
 
         public GameDifficulty GameDifficulty {
-            get { return _gamemDifficulty; }
-            set { _gamemDifficulty = value; }
+            get { return _gameDifficulty; }
+            set { _gameDifficulty = value; }
         }
 
+        // Setting base values for button.
         public MenuOption(Form parent) {
             this.Width = 200;
             this.Height = 40;
