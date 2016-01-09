@@ -8,7 +8,10 @@ namespace Minesweeper {
     class Program {
         static void Main(string[] args) {
 
-            // Start the game
+            // Minesweeper
+            // Petr Svoboda, 1. ročník
+            // Zimní semestr 2015/2016
+            // Programování I - NPRG030
 
             MenuController mn = new MenuController();
             mn.StartMenu();

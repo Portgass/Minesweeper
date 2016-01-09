@@ -5,7 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// Contains all game difficulties.
+/// </summary>
 enum GameDifficulty { Easy, Standard, Hard };
+/// <summary>
+/// Contains all game modes.
+/// </summary>
 enum GameMode { Normal, Extreme }
 
 namespace Minesweeper {
@@ -15,7 +21,7 @@ namespace Minesweeper {
         private GameView _gameView;
         private Dictionary<Field, FieldView> _fieldMap;
         private Dictionary<FieldView, Field> _fieldViewMap;
-        private int _bombCount;
+        private int _mineCount;
         private GameMode _gamemode;
 
         /// <summary>
@@ -27,13 +33,13 @@ namespace Minesweeper {
             _gameView = new GameView();
             _gamemode = gamemode;
             if (difficulty == GameDifficulty.Easy) {
-                _bombCount = 10;
+                _mineCount = 10;
                 _board = new Board(new Coordinates(8, 8));
             } else if (difficulty == GameDifficulty.Standard) {
-                _bombCount = 40;
+                _mineCount = 40;
                 _board = new Board(new Coordinates(16, 16));
             } else{
-                _bombCount = 99;
+                _mineCount = 99;
                 _board = new Board(new Coordinates(30, 16));
             }
         }
@@ -67,11 +73,13 @@ namespace Minesweeper {
             if (field.Items.Contains(FieldItem.Flag))
                 return;
             if (field.Items.Contains(FieldItem.Mine))
+                // Player revealed mine and loses game.
                 _gameView.EndScreen(false);
             fieldView.Reveal(field);
             field.IsRevealed = true;
             _fieldViewMap[fieldView] = field;
             if (field.NeighbourMineCount == 0 && !field.Items.Contains(FieldItem.Mine)) {
+                // Reveal all neighbours if they aren't already.
                 foreach (Field neighbour in field.Neighbours) {
                         FieldView neighbourView = _fieldMap[neighbour];
                         if (!neighbour.IsRevealed)
@@ -95,14 +103,16 @@ namespace Minesweeper {
                 // Console.WriteLine("Flagged field[" + field.Position.GetCoordinates() + "]");
                 _gameView.UpdateBombCount(-1);
                 if (field.Items.Contains(FieldItem.Mine))
-                    _bombCount -= 1;
+                    // Player flagged the right field.
+                    _mineCount -= 1;
             } else {
                 fieldView.SetFlag(false);
                 field.Items.Remove(FieldItem.Flag);
                 // Console.WriteLine("Unflagged field[" + field.Position.GetCoordinates() + "]");
                 _gameView.UpdateBombCount(1);
                 if (field.Items.Contains(FieldItem.Mine))
-                    _bombCount += 1;
+                    // Player unfortunately unflaged the field that contains bomb.
+                    _mineCount += 1;
             }
             _fieldViewMap[fieldView] = field;
         }
@@ -110,6 +120,7 @@ namespace Minesweeper {
         /// <summary>
         /// Runs functions based on user input.
         /// Checks if winning condition is true.
+        /// Sender is FieldView
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,7 +130,8 @@ namespace Minesweeper {
                 RevealField(fieldView);
             else if (e.Button == MouseButtons.Right)
                 FlagHandler(fieldView);
-            if (_bombCount == 0)
+            // Checking if all mines are flaged.
+            if (_mineCount == 0)
                 _gameView.EndScreen(true);
         }
 
@@ -129,7 +141,7 @@ namespace Minesweeper {
         public void InitializeGame() {
             _board.InitializeFields();
             _board.AssignNeighbourFields(_gamemode);
-            _board.PlantMines(_bombCount);
+            _board.PlantMines(_mineCount);
             AssignViewToFields();
         }
 
@@ -137,7 +149,7 @@ namespace Minesweeper {
         /// Opens game view.
         /// </summary>
         public void Start() {
-            _gameView.ShowBoard(_board, _bombCount);
+            _gameView.ShowBoard(_board, _mineCount);
         }
 
     }

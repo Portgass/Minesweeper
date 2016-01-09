@@ -11,6 +11,9 @@ namespace Minesweeper {
 
         private List<MenuOption> _menuOptions = new List<MenuOption>();
 
+        /// <summary>
+        /// Should contain all menu options.
+        /// </summary>
         public List<MenuOption> MenuOptions {
             get { return _menuOptions; }
             set { _menuOptions = value; }
@@ -18,6 +21,10 @@ namespace Minesweeper {
 
         private MenuOption _extremeModeEnabled;
 
+        /// <summary>
+        /// Contains extreme mode button.
+        /// If the game is going to increase the number of modes, move all the modes to MenuOption list.
+        /// </summary>
         public MenuOption ExtremeModeEnabled {
             get { return _extremeModeEnabled; }
             set { _extremeModeEnabled = value; }
@@ -35,30 +42,34 @@ namespace Minesweeper {
             MenuOption easyGameOption = new MenuOption(Window);
             MenuOption standardGameOption = new MenuOption(Window);
             MenuOption hardGameOption = new MenuOption(Window);
+            _extremeModeEnabled = new MenuOption(Window);
 
+            // Set difficulty
             easyGameOption.GameDifficulty = GameDifficulty.Easy;
             standardGameOption.GameDifficulty = GameDifficulty.Standard;
             hardGameOption.GameDifficulty = GameDifficulty.Hard;
 
+            // Add options to list.
             _menuOptions.Add(easyGameOption);
             _menuOptions.Add(standardGameOption);
             _menuOptions.Add(hardGameOption);
 
-            easyGameOption.Top = 250;
-            standardGameOption.Top = 310;
-            hardGameOption.Top = 370;
-
+            // Set backgrounds
             easyGameOption.BackgroundImage = Properties.Resources.option_easy;
             standardGameOption.BackgroundImage = Properties.Resources.option_standard;
             hardGameOption.BackgroundImage = Properties.Resources.option_hard;
+            _extremeModeEnabled.BackgroundImage = Properties.Resources.option_extreme;
+
+            // Positioning options to the middle of screen under game logo.
+            easyGameOption.Top = 250;
+            standardGameOption.Top = 310;
+            hardGameOption.Top = 370;
 
             foreach (MenuOption option in _menuOptions) {
                 option.Left = (Window.ClientSize.Width - option.Size.Width) / 2;
             }
 
-            _extremeModeEnabled = new MenuOption(Window);
             _extremeModeEnabled.Location = new Point(((Window.ClientSize.Width - _extremeModeEnabled.Size.Width) / 2), 430);
-            _extremeModeEnabled.BackgroundImage = Properties.Resources.option_extreme;
         }
 
         /// <summary>

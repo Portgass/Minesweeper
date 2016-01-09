@@ -21,6 +21,7 @@ namespace Minesweeper {
 
         /// <summary>
         /// Sets basic parameters that will apply to all game windows.
+        /// Adds callback to handle window closing.
         /// </summary>
         public View() {
             _window = new Form();

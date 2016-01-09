@@ -33,6 +33,7 @@ namespace Minesweeper {
 
         /// <summary>
         /// Closes menu, creates new Game Controller and starts game in set game mode with set difficulty.
+        /// Sender is MenuOption.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -41,11 +42,13 @@ namespace Minesweeper {
 
             _difficulty = option.GameDifficulty;
 
+            // Remove the callback for exiting the app.
             _menuView.Window.FormClosed -= _menuView.ExitApp;
             _menuView.Window.Close();
 
             // Console.WriteLine("Started " + _difficulty.ToString() + " game on " + _gameMode + " mode.");
 
+            // Create the game controller and start game.
             GameController gm = new GameController(_difficulty, _gameMode);
             gm.InitializeGame();
             gm.Start();
@@ -53,6 +56,7 @@ namespace Minesweeper {
 
         /// <summary>
         /// Enables(disables) extreme game mode bases on previous state and updates view.
+        /// Sender is MenuOption
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

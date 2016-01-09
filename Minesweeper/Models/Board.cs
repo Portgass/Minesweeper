@@ -20,6 +20,9 @@ namespace Minesweeper {
         
         private Field[,] _fields;
 
+        /// <summary>
+        /// Two-dimensional array of all fields on board.
+        /// </summary>
         public Field[,] Fields {
             get { return _fields; }
             set { _fields = value; }
@@ -108,7 +111,7 @@ namespace Minesweeper {
         }
 
         /// <summary>
-        /// Iterates over all fields and discover all mines that are neighbouring them. And sets the value as NeighbourMineCount
+        /// Iterates over all fields and discover all mines that are neighbouring them, and sets the value as NeighbourMineCount.
         /// </summary>
         public void SetNeighbourMineCount() {
             for (int i = 0; i < _dimension.X; i++) {
@@ -125,11 +128,12 @@ namespace Minesweeper {
         }
 
         /// <summary>
-        /// Generates mineCount of unique numbers between 0 and sum of all fields and plants mines to corresponding fields.
+        /// Generates mineCount of unique numbers between 0 and sum of all fields. Plants mines to corresponding fields.
         /// Also makes fields aware how many mines are in their neighbours.
         /// </summary>
         /// <param name="mineCount"></param>
         public void PlantMines(int mineCount) {
+            // Count the sum of all fields.
             int maxRnd = (_dimension.X * _dimension.Y) - 1;
             List<int> mineCoords = new List<int>();
             Random rnd = new Random();
@@ -159,6 +163,7 @@ namespace Minesweeper {
                     boardPosition += 1;
                 }
             }
+            // Make all field aware how many mines they are neighbouring.
             SetNeighbourMineCount();
         }
     }

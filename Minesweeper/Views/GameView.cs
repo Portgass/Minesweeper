@@ -11,11 +11,14 @@ namespace Minesweeper {
 
         private Label _clock;
 
+        /// <summary>
+        /// Displaying time in game window.
+        /// </summary>
         public Label Clock {
             get { return _clock; }
             set { _clock = value; }
         }
-
+        
         private Label _remainingBombs;
 
         /// <summary>
@@ -46,6 +49,7 @@ namespace Minesweeper {
         /// </summary>
         /// <param name="value"></param>
         public void UpdateBombCount(int value) {
+            // Remove the text and convert to int.
             int bombs = Int32.Parse(_remainingBombs.Text.Remove(0, 15));
             if (bombs > 0)
                 _remainingBombs.Text = "Avaiable flags: " + (bombs + value).ToString();
@@ -61,6 +65,7 @@ namespace Minesweeper {
             SetWindowSize(board.Dimension);
             Window.BackgroundImage = Properties.Resources.panel;
 
+            // Setting clock visuals.
             _clock = new Label();
             _clock.Parent = Window;
             _clock.BackColor = Color.Transparent;
@@ -75,6 +80,7 @@ namespace Minesweeper {
             // Runs every second.s
             timer.Tick += UpdateClock;
 
+            // Setting flag counter visuals
             _remainingBombs = new Label();
             _remainingBombs.Parent = Window;
             _remainingBombs.BackColor = Color.Transparent;
@@ -107,12 +113,14 @@ namespace Minesweeper {
                 time.ForeColor = Color.FromArgb(255, 216, 0);
                 time.Location = new Point(154, 106);
                 time.Text = _clock.Text.Remove(0, 13);
+                // If time is too long to fit, show this instead.
                 if (Int32.Parse(time.Text) >= 1000) {
                     time.Text = ">999";
                 }
             } else {
                 EndScreen.Window.BackgroundImage = Properties.Resources.game_over;
             }
+            // Removing the callback to exit app.
             Window.FormClosed -= ExitApp;
             Window.Close();
             EndScreen.Window.StartPosition = FormStartPosition.CenterScreen;

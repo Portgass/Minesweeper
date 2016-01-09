@@ -8,7 +8,9 @@ using System.Windows.Forms;
 
 namespace Minesweeper {
 
-    // Base button for menu view.
+    /// <summary>
+    /// Represents menu button.
+    /// </summary>
     class MenuOption : Button {
 
         private GameDifficulty _gameDifficulty;
@@ -18,7 +20,11 @@ namespace Minesweeper {
             set { _gameDifficulty = value; }
         }
 
-        // Setting base values for button.
+        /// <summary>
+        /// Initializes button and its visuals.
+        /// Needs parent form otherwise it won't display itself.
+        /// </summary>
+        /// <param name="parent"></param>
         public MenuOption(Form parent) {
             this.Width = 200;
             this.Height = 40;

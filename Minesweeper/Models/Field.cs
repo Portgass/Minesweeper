@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Items that field can contain.
+/// </summary>
 public enum FieldItem { Mine, Flag };
 
 namespace Minesweeper {
@@ -22,6 +25,9 @@ namespace Minesweeper {
 
         private List<FieldItem> _items;
 
+        /// <summary>
+        /// List of Items that this field contains.
+        /// </summary>
         public List<FieldItem> Items
         {
             get { return _items; }
@@ -30,6 +36,9 @@ namespace Minesweeper {
 
         private List<Field> _neighbours;
 
+        /// <summary>
+        /// All field neighbours.
+        /// </summary>
         public List<Field> Neighbours {
             get { return _neighbours; }
             set { _neighbours = value; }
@@ -37,6 +46,9 @@ namespace Minesweeper {
 
         private int _neighbourMineCount;
 
+        /// <summary>
+        /// Number of mines in neighbours.
+        /// </summary>
         public int NeighbourMineCount {
             get { return _neighbourMineCount; }
             set { _neighbourMineCount = value; }
@@ -44,6 +56,9 @@ namespace Minesweeper {
 
         private bool _isRevealed;
 
+        /// <summary>
+        /// Keeps track if field is revealed.
+        /// </summary>
         public bool IsRevealed {
             get { return _isRevealed; }
             set { _isRevealed = value; }
