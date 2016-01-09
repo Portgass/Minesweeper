@@ -9,7 +9,7 @@ Hra Minesweeper(hledání min), podporující více obtížností a herních mó
 
 Hra by měla být naprogramovaná tak, aby bylo snadné ji rozšířit o více obtížností a módů.   
 Dále by mělo být snadné hru obohatit o více prvků, než tradiční hledání min.   
-Do políček lze vložit více různých herních objektů, pro které by vytvoření nových mechanik je snadné.    
+Do políček lze vložit více různých herních objektů, pro které by bylo vytvoření nových mechanik snadné.    
 Reprezentace všech datových modelů(políček, hracího pole) s nimi není pevně spojena. Umožňuje to jednoduší změny zobrazení.
 
 Algoritmy
@@ -40,7 +40,7 @@ o o o o o
 ```
 Výsledky se liší pro různé herní módy.
 
-Normální mód operuje pouze s pozicemi na herní desce a hraničním polím přiřazuje ménně polí.
+Normální mód operuje pouze s pozicemi na herní desce a hraničním polím přiřazuje ménně sousedících polí.
 ```
 T N o o o
 N N o o o
@@ -57,7 +57,7 @@ o o o o o
 N N o o N
 ```
 
-**3. Pokládání min**
+**3. Pokládání min**   
 Vytvoříme x náhodných čísel v rozmezí od 0 do počtu všech polí - 1. Chceme všechna čísla různá.    
 Tato čísla se uloží v seznamu.    
 Při procházení všech polí si zvyšujeme hodnotu nynějšího projití a ta se porovnává s hodnotami v seznamu.    
@@ -66,19 +66,21 @@ Po umístění všech min projdeme všechny pole znovu a spočítáme sumu min v
 
 Program
 ------
-Všechny hlavní komponenty programu jsou třídy, některé dědí vlastnosti z prvků Windows Forms. Celé zobrazení programu zajišťují Windows Forms.
-Třídy obsahující data samotných prvků:
-1. Coordinates - pomocná třída, která definuje jednotky používané programem.
-2. Field - zná svou pozici, obsah a také všechny jeho sousedy.
-3. Board - obsahuje pole všech polí a přiřazuje jim jejich prvky a pomáhá jim registrovat jejich sousedy.
-Třídy zajišťující zobrazení prvků:
-1. View - Zprostředkovává zobrazení oken a ukončení programu. MenuView a GameView dědí jeho vlastnosti.
-2. MenuView - Zobrazuje menu, obsahuje tlačítka pro výběr obtížnosti a módu.
-3. GameView - Zobrazuje hrací plochu, a informace o herním čase a použitelných vlajkách. Také zajišťuje okno po skončení hry.
-4. MenuOption - Dědí z WinForms Button. Jsou mu nastaveny základní atributy pro zjednodušení nastování všech tlačítek menu.
-5. FieldView - Zobrazení jednotlivých polí. Obstarává vzhled ovlajkovaných a odhalených polí.
-Třídy zajišťující ovládání hry:
-1. MenuController - Zajišťuje zpacování kliknutí na tlačítek menu a spouštění hry se správným nastavením.
+Všechny hlavní komponenty programu jsou třídy, některé dědí vlastnosti z prvků Windows Forms. Celé zobrazení programu zajišťují Windows Forms.   
+Třídy obsahující data samotných prvků:   
+1. Coordinates - pomocná třída, která definuje jednotky používané programem.   
+2. Field - Zná svou pozici, obsah a také všechny jeho sousedy.   
+3. Board - Obsahuje pole všech polí a přiřazuje jim jejich prvky a pomáhá jim registrovat jejich sousedy.
+
+Třídy zajišťující zobrazení prvků:   
+1. View - Zprostředkovává zobrazení oken a ukončení programu. MenuView a GameView dědí jeho vlastnosti.   
+2. MenuView - Zobrazuje menu, obsahuje tlačítka pro výběr obtížnosti a módu.   
+3. GameView - Zobrazuje hrací plochu, a informace o herním čase a použitelných vlajkách. Také zajišťuje okno po skončení hry.   
+4. MenuOption - Dědí z WinForms Button. Jsou mu nastaveny základní atributy pro zjednodušení nastování všech tlačítek menu.   
+5. FieldView - Dědí z WinForms Button. Zobrazení jednotlivých polí. Obstarává vzhled ovlajkovaných a odhalených polí.
+
+Třídy zajišťující ovládání hry:   
+1. MenuController - Zajišťuje zpacování kliknutí na tlačítek menu a spouštění hry se správným nastavením.   
 2. GameController - Přiřazuje polím jejich zobrazení. Nastavuje chování hry po hráčových akcích. Kontroluje podmínky ukončení hry.
 
 Ovládání
@@ -89,7 +91,8 @@ Po kliknutí na obtížnost se spustí hra.
 V dolních rozích je čas od startu hry(nalevo) a dostupný počet vlaječek(napravo), což je i počet min na herní desce.   
 Cílem hry je nalezení všech min označením všech políček obsahující minu vlajkou.   
 Levé tlačítko myši odhaluje pole, pravé sází vlajku.   
-Po odhalení pole se může zobrazit číslo reprezentující počet min v okolních polích. Pomocí těchto čísel lze určit polohy min.
+Po odhalení pole se může zobrazit číslo reprezentující počet min v okolních polích. Pomocí těchto čísel lze určit polohy min.   
+V extrémním módu číslo min v okolí pro hraníční pole počítá i miny z druhé strany herní desky.
 
 Průběh práce
 -----
@@ -103,4 +106,4 @@ Také podpora dalších módů by šla zlepšit. Momentálně se počítá pouze
 
 Jak program přeložit
 -----
-Program lze přeložit ve Visual Studiu. Vytvořeno pro .NET Framework 4.5.2
+Program lze přeložit ve Visual Studiu. Vytvořeno pro .NET Framework 4.5.2.
