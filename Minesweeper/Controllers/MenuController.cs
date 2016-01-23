@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Minesweeper {
     class MenuController {
 
-        private MenuView _menuView;
+        public MenuView _menuView;
 
         private GameDifficulty _difficulty;
 
@@ -37,7 +37,7 @@ namespace Minesweeper {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void OptionClicked(object sender, System.Windows.Forms.MouseEventArgs e) {
+        public void OptionClicked(object sender, System.Windows.Forms.MouseEventArgs e) {
             MenuOption option = (MenuOption)sender;
 
             _difficulty = option.GameDifficulty;
@@ -46,10 +46,8 @@ namespace Minesweeper {
             _menuView.Window.FormClosed -= _menuView.ExitApp;
             _menuView.Window.Close();
 
-            // Console.WriteLine("Started " + _difficulty.ToString() + " game on " + _gameMode + " mode.");
 
-            // Create the game controller and start game.
-            GameController gm = new GameController(_difficulty, _gameMode);
+            var gm = new BoardController(_difficulty, _gameMode);
             gm.InitializeGame();
             gm.Start();
         }
@@ -78,7 +76,8 @@ namespace Minesweeper {
         /// <summary>
         /// Initializes and shows game menu and adds callbacks for menu buttons.
         /// </summary>
-        public void StartMenu() {
+        public void StartMenu()
+        {
             _menuView.InitializeMenu();
             foreach (MenuOption option in _menuView.MenuOptions) {
                 option.MouseClick += OptionClicked;

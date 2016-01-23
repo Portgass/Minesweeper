@@ -31,7 +31,7 @@ namespace Minesweeper {
         /// </summary>
         /// <param name="size"></param>
         void SetWindowSize(Coordinates size) {
-            Window.ClientSize = new Size(size.X * 32, size.Y * 32 + 32);
+            Window.ClientSize = new Size(size.X * 24, size.Y * 24 + 24);
         }
 
         /// <summary>
@@ -64,6 +64,7 @@ namespace Minesweeper {
         public void ShowBoard(Board board, int bombCount) {
             SetWindowSize(board.Dimension);
             Window.BackgroundImage = Properties.Resources.panel;
+            Window.BackColor = Color.FromArgb(66, 66, 66);
 
             // Setting clock visuals.
             _clock = new Label();

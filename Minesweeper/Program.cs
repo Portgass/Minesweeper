@@ -13,8 +13,7 @@ namespace Minesweeper {
             // Zimní semestr 2015/2016
             // Programování I - NPRG030
 
-            MenuController mn = new MenuController();
-            mn.StartMenu();
+            var gC = new GameController();
         }
     }
 }

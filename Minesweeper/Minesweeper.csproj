@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6E578FA2-611D-4F6A-8722-74CB0E51EF94}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Minesweeper</RootNamespace>
     <AssemblyName>Minesweeper</AssemblyName>
@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Models\Board.cs" />
@@ -87,15 +88,6 @@
     <None Include="Resources\bcg.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\field.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\field_flag.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\field_revealed.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\option.png" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +113,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\winner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\field_revealed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\field_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\field.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\field_flag.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
