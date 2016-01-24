@@ -9,23 +9,33 @@ namespace Minesweeper.Views {
     public class TileView : Button {
 
         private readonly Color _tileColor = Color.FromArgb(224, 224, 224);
-        private Color _highlightTileColor = Color.FromArgb(158, 158, 158);
-        private readonly Color _highlightNeighbourColor = Color.FromArgb(189, 189, 189);
+        private readonly Color _highlightTileColor = Color.FromArgb(214, 214, 214);
 
+        private readonly Color _tileRevealColor = Color.FromArgb(42, 42, 42);
+        private readonly Color _highlightTileRevealColor = Color.FromArgb(38, 38, 38);
+
+        private readonly Color _tileFlagColor = Color.FromArgb(244, 67, 54);
+        private readonly Color _highlightTileFlagColor = Color.FromArgb(229, 57, 53);
 
         public TileView(Coordinates position) {
             Size = new Size(24, 24);
             Location = new Point(position.X * 24, position.Y * 24);
             TabStop = false;
+            BackColor = _tileColor;
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
-            BackColor = _tileColor;
+            FlatAppearance.MouseOverBackColor = BackColor;
+            FlatAppearance.MouseDownBackColor = BackColor;
+            BackColorChanged += (s, e) => {
+                FlatAppearance.MouseOverBackColor = BackColor;
+                FlatAppearance.MouseDownBackColor = BackColor;
+            };
             Font = new Font("pixelmix", 12, FontStyle.Regular);
         }
 
         public void RevealTileContent(int mineCount)
         {
-            BackColor = Color.FromArgb(42, 42, 42);
+            BackColor = _tileRevealColor;
 
             Text = mineCount.ToString();
 
@@ -63,19 +73,17 @@ namespace Minesweeper.Views {
 
         public void DisplayFlag(bool display)
         {
-            BackColor = display ? Color.FromArgb(244, 67, 54) : _tileColor;
+            BackColor = display ? _tileFlagColor : _tileColor;
         }
 
         public void HighlightTile()
         {
             if (BackColor == _tileColor || BackColor == _highlightTileColor)
                 BackColor = BackColor == _tileColor ? _highlightTileColor : _tileColor;
-        }
-
-        public void HighlightNeighbour()
-        {
-            if (BackColor == _tileColor || BackColor == _highlightNeighbourColor)
-                BackColor = BackColor == _tileColor ? _highlightNeighbourColor : _tileColor;
+            else if (BackColor == _tileRevealColor || BackColor == _highlightTileRevealColor)
+                    BackColor = BackColor == _tileRevealColor ? _highlightTileRevealColor : _tileRevealColor;
+            else if (BackColor == _tileFlagColor || BackColor == _highlightTileFlagColor)
+                BackColor = BackColor == _tileFlagColor ? _highlightTileFlagColor : _tileFlagColor;
         }
 
         public void DisplayMine()

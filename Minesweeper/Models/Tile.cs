@@ -33,35 +33,55 @@ namespace Minesweeper {
 
             View = new TileView(Position);
             View.MouseDown += OnTileClick;
-            View.MouseEnter += OnTileHover;
-            View.MouseLeave += OnTileHover;
+            View.MouseEnter += OnTileMouseEnter;
+            View.MouseLeave += OnTileMouseLeave;
             Items.CollectionChanged += CheckContent;
         }
 
         private void OnTileClick(object sender, MouseEventArgs e)
         {
+            ToggleHighlight();
+
             if (e.Button == MouseButtons.Left)
                 Reveal();
             if (e.Button == MouseButtons.Right)
                 ToggleFlag();
+
+            ToggleHighlight();
         }
 
-        private void OnTileHover(object sender, EventArgs e)
+        private void OnTileMouseEnter(object sender, EventArgs e)
         {
-            View.HighlightTile();
-            NeighbourHighlight();
+            ToggleHighlight();
         }
 
-        public void NeighbourHighlight()
+        private void OnTileMouseLeave(object sender, EventArgs e)
+        {
+            ToggleHighlight();
+        }
+
+        private void ToggleHighlight()
         {
             IsHighlighted = !IsHighlighted;
+            View.HighlightTile();
 
-            var lineNeighbours = Neighbours.FindAll(neighbour => (neighbour.Position.X == Position.X) || (neighbour.Position.Y == Position.Y));
-            foreach (var neighbour in lineNeighbours)
-            {
-                neighbour.View.HighlightNeighbour();
-                neighbour.NeighbourHighlight();
-            }
+            NeighbourHighlight(new Coordinates(0, -1), IsHighlighted);
+            NeighbourHighlight(new Coordinates(0, 1), IsHighlighted);
+            NeighbourHighlight(new Coordinates(-1, 0), IsHighlighted);
+            NeighbourHighlight(new Coordinates(1, 0), IsHighlighted);
+        }
+
+        public void NeighbourHighlight(Coordinates coords, bool mouseEnter)
+        {
+            var neighbour = Neighbours.Find(n => (n.Position.X == (Position.X + coords.X)) && n.Position.Y == (Position.Y + coords.Y));
+
+            if (neighbour == null)
+                return;
+
+            neighbour.IsHighlighted = !neighbour.IsHighlighted;
+            neighbour.View.HighlightTile();
+
+            neighbour.NeighbourHighlight(coords, IsHighlighted);
         }
 
         private void Reveal()
