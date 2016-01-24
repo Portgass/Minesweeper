@@ -27,10 +27,15 @@ namespace Minesweeper.Models
             {
                 for (var j = 0; j < Dimension.Y; j++)
                 {
-                    Tiles.Add(new Tile(new Coordinates(i, j)));
+                    var tile = new Tile(new Coordinates(i, j)) {View = {Parent = View.Window}};
+                    Tiles.Add(tile);
                 }
             }
-            Tiles.ForEach(tile => tile.View.Parent = View.Window);
+        }
+
+        private void PlantMines()
+        {
+            
         }
 
         
