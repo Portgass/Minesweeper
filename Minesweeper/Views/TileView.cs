@@ -8,28 +8,25 @@ namespace Minesweeper.Views {
     
     public class TileView : Button {
 
+        private readonly Color _tileColor = Color.FromArgb(224, 224, 224);
+        private Color _highlightTileColor = Color.FromArgb(158, 158, 158);
+        private readonly Color _highlightNeighbourColor = Color.FromArgb(189, 189, 189);
+
+
         public TileView(Coordinates position) {
             Size = new Size(24, 24);
             Location = new Point(position.X * 24, position.Y * 24);
             TabStop = false;
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
-            BackColor = Color.FromArgb(224, 224, 224);
+            BackColor = _tileColor;
             Font = new Font("pixelmix", 12, FontStyle.Regular);
         }
 
-        public void DisplayFlag(bool display)
+        public void RevealTileContent(int mineCount)
         {
-            BackColor = display ? Color.FromArgb(244, 67, 54) : Color.FromArgb(224, 224, 224);
-        }
+            BackColor = Color.FromArgb(42, 42, 42);
 
-        public void DisplayMine()
-        {
-            BackColor = Color.FromArgb(0, 0, 0);
-        }
-
-        public void DisplayNeighbourContent(int mineCount)
-        {
             Text = mineCount.ToString();
 
             if (mineCount == 0)
@@ -61,16 +58,29 @@ namespace Minesweeper.Views {
                 case 8:
                     ForeColor = Color.FromArgb(191, 54, 12);
                     break;
-
             }
         }
 
-        public void RevealState(bool isRevealed)
+        public void DisplayFlag(bool display)
         {
-            BackColor = isRevealed ? Color.FromArgb(42, 42, 42) : Color.FromArgb(224, 224, 224);
+            BackColor = display ? Color.FromArgb(244, 67, 54) : _tileColor;
+        }
 
-            if (isRevealed)
-                Text = "";
+        public void HighlightTile()
+        {
+            if (BackColor == _tileColor || BackColor == _highlightTileColor)
+                BackColor = BackColor == _tileColor ? _highlightTileColor : _tileColor;
+        }
+
+        public void HighlightNeighbour()
+        {
+            if (BackColor == _tileColor || BackColor == _highlightNeighbourColor)
+                BackColor = BackColor == _tileColor ? _highlightNeighbourColor : _tileColor;
+        }
+
+        public void DisplayMine()
+        {
+            BackColor = Color.FromArgb(0, 0, 0);
         }
     }
 }
