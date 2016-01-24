@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using Minesweeper.Models;
 
-namespace Minesweeper
+namespace Minesweeper.Controllers
 {
-    class GameController
+    public class GameController
     {
-        private MenuController mn;
+        
+        private BoardController BoardControl { get; set; }
 
         public GameController()
         {
-            mn = new MenuController();
-            mn.StartMenu();
+            var board = new Board(new Coordinates(20, 20));
         }
 
-        void StartGame(object sender, EventArgs e)
+        public void Start()
         {
-            var gm = new BoardController(mn.Difficulty, mn.GameMode);
-            gm.InitializeGame();
-            gm.Start();
+            Application.Run();
         }
     }
 }

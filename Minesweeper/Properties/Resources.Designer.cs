@@ -143,16 +143,6 @@ namespace Minesweeper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _9 {
-            get {
-                object obj = ResourceManager.GetObject("_9", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap bcg {
             get {
                 object obj = ResourceManager.GetObject("bcg", resourceCulture);
@@ -176,26 +166,6 @@ namespace Minesweeper.Properties {
         internal static System.Drawing.Bitmap field_flag {
             get {
                 object obj = ResourceManager.GetObject("field_flag", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap field_hover {
-            get {
-                object obj = ResourceManager.GetObject("field_hover", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap field_revealed {
-            get {
-                object obj = ResourceManager.GetObject("field_revealed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

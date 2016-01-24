@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Minesweeper.Controllers;
 
 namespace Minesweeper {
     class Program {
@@ -13,7 +14,8 @@ namespace Minesweeper {
             // Zimní semestr 2015/2016
             // Programování I - NPRG030
 
-            var gC = new GameController();
+            var game = new GameController();
+            game.Start();
         }
     }
 }

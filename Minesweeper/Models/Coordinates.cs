@@ -1,41 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Minesweeper {
+﻿namespace Minesweeper.Models {
 
     /// <summary>
     /// Defines the units in which are all game objects represented.
     /// </summary>
-    class Coordinates {
+    public class Coordinates {
+        public int X { get; set; }
 
-        private int _x;
-
-        public int X {
-            get { return _x; }
-            set { _x = value; }
-        }
-
-        private int _y;
-
-        public int Y {
-            get { return _y; }
-            set { _y = value; }
-        }
+        public int Y { get; set; }
 
         public Coordinates(int x, int y) {
-            _x = x;
-            _y = y;
-            // Console.WriteLine("New coordinates: " + x + ", " + y);
+            X = x;
+            Y = y;
         }
 
         /// <summary>
         /// Helps with printing out the coordinates.
         /// </summary>
         public string GetCoordinates() {
-            return _x + ", " + _y;
+            return X + ", " + Y;
         }
     }
 }
